@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.rexqueen.dindajayaapp.About;
 import com.rexqueen.dindajayaapp.Home;
 import com.rexqueen.dindajayaapp.Login;
 import com.rexqueen.dindajayaapp.R;
@@ -25,6 +26,7 @@ public class MenuFragment extends Fragment {
     Intent intent;
     Login login;
     Home home;
+    About about;
 
     private MenuViewModel notificationsViewModel;
 
@@ -36,6 +38,7 @@ public class MenuFragment extends Fragment {
 
         login = new Login();
         home = new Home();
+        about = new About();
 
         tutor = root.findViewById(R.id.tutorial);
         tentang = root.findViewById(R.id.about);
@@ -52,7 +55,9 @@ public class MenuFragment extends Fragment {
         tentang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(root.getContext(), "Fitur belum tersedia", Toast.LENGTH_SHORT).show();
+                intent = new Intent(root.getContext(), about.getClass());
+                startActivity(intent);
+                home.finish();
             }
         });
 
@@ -70,7 +75,10 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(root.getContext(), "Aplikasi dimimalkan", Toast.LENGTH_SHORT).show();
-                System.exit(0);
+                intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

@@ -13,7 +13,7 @@ public class Login extends AppCompatActivity {
 
     Button masuk_bt;
     Intent intent;
-    EditText editUser;
+    EditText editUser, passWd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +21,26 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
 
         editUser = findViewById(R.id.username);
+        passWd = findViewById(R.id.pass);
 
         masuk_bt = findViewById(R.id.masuk_bt);
         masuk_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Login.this, Home.class);
-                startActivity(intent);
-                Toast.makeText(Login.this, "Selamat Datang \""+editUser.getText()+"\"", Toast.LENGTH_SHORT).show();
-                finish();
+                if (editUser.getText().length() <= 0){
+                    Toast.makeText(Login.this, "Nama Pengguna kosong!", Toast.LENGTH_SHORT).show();
+                    editUser.setError("Nama Pengguna tidak boleh kosong");
+                }
+                else if (passWd.getText().length() <= 0){
+                    Toast.makeText(Login.this, "Kata Sandi kosong!", Toast.LENGTH_SHORT).show();
+                    passWd.setError("Kata Sandi tidak boleh kosong");
+                }
+                else {
+                    intent = new Intent(Login.this, Home.class);
+                    startActivity(intent);
+                    Toast.makeText(Login.this, "Selamat Datang \"" + editUser.getText() + "\"", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
 

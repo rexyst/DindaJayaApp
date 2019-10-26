@@ -31,7 +31,8 @@
             android:textSize="16sp"
             android:inputType="text"
             android:textColor="#000000"
-            android:textColorHint="#949494"></EditText>
+            android:textColorHint="#949494"
+            android:ems="10"></EditText>
 
         <EditText
             android:layout_width="match_parent"
@@ -50,7 +51,8 @@
             android:text="Masuk"
             android:textSize="16sp"
             android:background="@color/colorPrimary"
-            android:id="@+id/masuk_bt"></Button>
+            android:id="@+id/masuk_bt"
+            android:layout_marginTop="20dp"></Button>
 
         <TextView
             android:layout_width="match_parent"
@@ -59,6 +61,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp"
             android:textSize="16sp"
+            android:textAlignment="center"
             android:textColor="#949494"></TextView>
 
     </LinearLayout>
