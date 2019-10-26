@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorAccentLight">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginRight="15sp"
-        android:layout_marginLeft="15sp">
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dinda Jaya App"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginBottom="50sp"></TextView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_full"
+            android:layout_marginBottom="100dp"></ImageView>
 
         <EditText
             android:layout_width="match_parent"
@@ -29,7 +28,10 @@
             android:hint="Nama Pengguna"
             android:textAlignment="center"
             android:id="@+id/username"
-            android:inputType="text"></EditText>
+            android:textSize="16sp"
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textColorHint="#949494"></EditText>
 
         <EditText
             android:layout_width="match_parent"
@@ -37,14 +39,27 @@
             android:hint="Kata Sandi"
             android:textAlignment="center"
             android:id="@+id/pass"
-            android:inputType="textPassword"></EditText>
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#949494"></EditText>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Masuk"
-            android:background="#b81eba"
+            android:textSize="16sp"
+            android:background="@color/colorPrimary"
             android:id="@+id/masuk_bt"></Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_alert"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:textSize="16sp"
+            android:textColor="#949494"></TextView>
 
     </LinearLayout>
 

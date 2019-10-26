@@ -1,4 +1,4 @@
-package com.rexqueen.dindajayaapp.ui.dashboard;
+package com.rexqueen.dindajayaapp.ui.daftar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.rexqueen.dindajayaapp.R;
 
-public class DashboardFragment extends Fragment {
+public class DaftarFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private DaftarViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+                ViewModelProviders.of(this).get(DaftarViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_daftar, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override

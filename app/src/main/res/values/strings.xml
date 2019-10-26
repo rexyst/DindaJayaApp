@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Dinda Jaya App</string>
+    <string name="app_ver">v1.2</string>
     <string name="title_activity_home">Home</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_home">Home</string>
+    <string name="app_daftar">Daftar</string>
+    <string name="app_menu">Menu</string>
+    <string name="login_alert">*Hanya pemilik konveksi yang dapat melakukan login.</string>
+    <string name="menu_min">Minimalkan Aplikasi</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_tentang">Tentang</string>
+    <string name="menu_tutorial">Tutorial</string>
 </resources>

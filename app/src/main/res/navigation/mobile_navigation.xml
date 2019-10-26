@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.rexqueen.dindajayaapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/app_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.rexqueen.dindajayaapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_daftar"
+        android:name="com.rexqueen.dindajayaapp.ui.daftar.DaftarFragment"
+        android:label="@string/app_daftar"
+        tools:layout="@layout/fragment_daftar" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.rexqueen.dindajayaapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_menu"
+        android:name="com.rexqueen.dindajayaapp.ui.menu.MenuFragment"
+        android:label="@string/app_menu"
+        tools:layout="@layout/fragment_menu" />
 </navigation>
