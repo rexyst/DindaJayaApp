@@ -12,3 +12,9 @@ Bismillah InsyaAllah Skripsi
 >>>Minimize <br />
 >>
 >>Optimasi UI
+
+>Versi 1.3
+>>Fitur Tentang + contact-action-listener <br />
+>>fix Minimize <br />
+>>fix validasi login (tanpa database) <br />
+>>Optimasi UI
