@@ -14,7 +14,7 @@ Bismillah InsyaAllah Skripsi
 >>Optimasi UI
 
 >Versi 1.3
->>Fitur Tentang + contact-action-listener
->>fix Minimize
->>fix validasi login (tanpa database)
+>>Fitur Tentang + contact-action-listener <br />
+>>fix Minimize <br />
+>>fix validasi login (tanpa database) <br />
 >>Optimasi UI
