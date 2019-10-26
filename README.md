@@ -6,8 +6,9 @@ Bismillah InsyaAllah Skripsi
 
 >Versi 1.2
 >>Fitur Menu
->>>Tutorial (Toast)
->>>Tentang (Toast)
->>>Keluar
->>>Minimize
+>>>Tutorial (Toast) <br />
+>>>Tentang (Toast) <br />
+>>>Keluar <br />
+>>>Minimize <br />
+>>
 >>Optimasi UI
