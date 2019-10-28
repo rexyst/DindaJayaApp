@@ -18,3 +18,10 @@ Bismillah InsyaAllah Skripsi
 >>fix Minimize <br />
 >>fix validasi login (tanpa database) <br />
 >>Optimasi UI
+
+>Versi 1.4
+>>add SQLite Database <br />
+>>Fitur Daftar
+>>>Fitur tambah pesanan <br />
+>>>Tampilkan data SQLite ke TableLayout
+>>add komen pada kode
