@@ -9,7 +9,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // menyiapkan nama database yang akan dipakai
     private static final String DATABASE_NAME = "data_master.db";
     // menyiapkan versi database
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "create table orders (no integer primary key AUTOINCREMENT, " +
                 "nama text null, " +
                 "jenis text null, " +
+                "noHp text null, " +
                 "tglPesan text null, " +
                 "tglSelesai text null, " +
                 "tglAmbil text null, " +

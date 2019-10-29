@@ -24,4 +24,12 @@ Bismillah InsyaAllah Skripsi
 >>Fitur Daftar
 >>>Fitur tambah pesanan <br />
 >>>Tampilkan data SQLite ke TableLayout
+>>
 >>add komen pada kode
+
+>Versi 1.5
+>>update SQLite table <br />
+>>move Fitur Daftar ke Home
+>>>update Fitur tambah pesanan <br />
+>>
+>>Optimasi UI Login

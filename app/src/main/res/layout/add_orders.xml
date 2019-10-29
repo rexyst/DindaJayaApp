@@ -110,6 +110,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="No. HP"
+            android:textSize="16sp"
+            android:typeface="monospace"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nomor HP"
+            android:id="@+id/hp"
+            android:textSize="16sp"
+            android:typeface="monospace"
+            android:layout_marginBottom="15dp"
+            android:inputType="phone"></EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Keterangan"
             android:textSize="16sp"
             android:typeface="monospace"

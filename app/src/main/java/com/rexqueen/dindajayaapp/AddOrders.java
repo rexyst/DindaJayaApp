@@ -30,7 +30,7 @@ public class AddOrders extends AppCompatActivity {
     DBHelper dbHelper;
 
     //inisiasi variabel dari View
-    EditText nama, keterangan;
+    EditText nama, keterangan, noHp;
     RadioButton seragam, atasan, bawahan;
     Button tanggal_bt, pesanan_bt;
     TextView tgl;
@@ -55,6 +55,7 @@ public class AddOrders extends AppCompatActivity {
         // edittext
         nama = findViewById(R.id.nama);
         keterangan = findViewById(R.id.keterangan);
+        noHp = findViewById(R.id.hp);
         // button
         tanggal_bt = findViewById(R.id.tanggal_bt);
         pesanan_bt = findViewById(R.id.addPesanan);
@@ -106,70 +107,77 @@ public class AddOrders extends AppCompatActivity {
                     nama.setError("Nama tidak boleh kosong");
                 } else
                     // apakah jenis sudah dipilih?
-                if (Integer.parseInt(jns) == 0) {
-                    Toast.makeText(AddOrders.this, "Silahkan pilih jenis pesanan", Toast.LENGTH_SHORT).show();
-                } else
-                    // apakah tanggal sudah dipilih?
-                if (tanggal.length() <= 1){
-                    Toast.makeText(AddOrders.this, "Silahkan pilih tanggal pemesanan", Toast.LENGTH_SHORT).show();
-                } else
-                    // apakah keterangan diisi?
-                if (keterangan.getText().length() <= 0){
-                    keterangan.setError("Silahkan isi keterangan");
-                } else {
-                    // jika sudah lengkap
-                    // membuat dialog konfirmasi
-                    Builder builder = new Builder(AddOrders.this);
-                    builder.setTitle("Tambah Pesanan");
-                    builder.setMessage("Apakah Anda yakin untuk menambah data?");
-                    builder.setCancelable(false);
-                    // membuat tombol "Ya" dengan listenernya
-                    builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    if (Integer.parseInt(jns) == 0) {
+                        Toast.makeText(AddOrders.this, "Silahkan pilih jenis pesanan", Toast.LENGTH_SHORT).show();
+                    } else
+                        // apakah tanggal sudah dipilih?
+                        if (tanggal.length() <= 1){
+                            Toast.makeText(AddOrders.this, "Silahkan pilih tanggal pemesanan", Toast.LENGTH_SHORT).show();
+                        } else
+                            // apakah nomor hp sesuai format?
+                            if (noHp.getText().length() < 10 || noHp.getText().length() > 13) {
+                                Toast.makeText(AddOrders.this, "Nomor HP salah", Toast.LENGTH_SHORT).show();
+                                noHp.setError("Nomor HP salah");
+                            } else
+                                // apakah keterangan diisi?
+                                if (keterangan.getText().length() <= 0){
+                                    keterangan.setError("Silahkan isi keterangan");
+                                } else {
+                                    // jika sudah lengkap
+                                    // membuat dialog konfirmasi
+                                    Builder builder = new Builder(AddOrders.this);
+                                    builder.setTitle("Tambah Pesanan");
+                                    builder.setMessage("Apakah Anda yakin untuk menambah data?");
+                                    builder.setCancelable(false);
+                                    // membuat tombol "Ya" dengan listenernya
+                                    builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                            // mendapatkan database dari class DBHelper
-                            dbHelper = new DBHelper(AddOrders.this);
-                            SQLiteDatabase db = dbHelper.getWritableDatabase();
-                            // lakukan percobaan
-                            try {
-                                // mengeksekusi query menambahkan data ke database pada tabel "orders"
-                                db.execSQL("insert into orders(nama, jenis, tglPesan, tglSelesai, tglAmbil, keterangan, status) " +
-                                        "values(" +
-                                        "'"+nama.getText()+"', " +
-                                        "'"+jns+"', " +
-                                        "'"+tanggal+"', " +
-                                        "'"+tanggal+"', " +
-                                        "'"+tanggal+"', " +
-                                        "'"+keterangan+"', " +
-                                        "'1')");
+                                            // mendapatkan database dari class DBHelper
+                                            dbHelper = new DBHelper(AddOrders.this);
+                                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                                            // lakukan percobaan
+                                            try {
+                                                // mengeksekusi query menambahkan data ke database pada tabel "orders"
+                                                db.execSQL("insert into orders(nama, jenis, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, status) " +
+                                                        "values(" +
+                                                        "'"+nama.getText()+"', " +
+                                                        "'"+jns+"', " +
+                                                        "'"+noHp.getText()+"', " +
+                                                        "'"+tanggal+"', " +
+                                                        "'"+tanggal+"', " +
+                                                        "'"+tanggal+"', " +
+                                                        "'"+keterangan.getText()+"', " +
+                                                        "'1')");
 
-                                // jika berhasil tampilkan toast
-                                Toast.makeText(AddOrders.this, "Berhasil menambahkan pesanan", Toast.LENGTH_SHORT).show();
-                                // dan berpindah ke tampilan Home dengan imbuhan variabel extra dengan nilai 2 untuk fragment "daftar"
-                                startActivity(new Intent(AddOrders.this, Home.class).putExtra("page", 2));
-                                // tutup activity AddOrders
-                                finish();
-                            } catch (Exception e) {
-                                // jika gagal tampilkan toast dengan pesan error dari consol
-                                Toast.makeText(AddOrders.this, "Gagal menambah pesanan, error: "+e, Toast.LENGTH_SHORT).show();
-                            }
+                                                // jika berhasil tampilkan toast
+                                                Toast.makeText(AddOrders.this, "Berhasil menambahkan pesanan", Toast.LENGTH_SHORT).show();
+                                                // dan berpindah ke tampilan Home dengan imbuhan variabel extra dengan nilai 2 untuk fragment "daftar"
+                                                startActivity(new Intent(AddOrders.this, Home.class).putExtra("page", 1));
+                                                // tutup activity AddOrders
+                                                finish();
+                                            } catch (Exception e) {
+                                                // jika gagal tampilkan toast dengan pesan error dari consol
+                                                System.out.println(e);
+                                                Toast.makeText(AddOrders.this, "Gagal menambah pesanan, error: "+e, Toast.LENGTH_SHORT).show();
+                                            }
 
-                        }
-                    });
+                                        }
+                                    });
 
-                    // membuat tombol "Tidak" dengan listener
-                    builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // jika tombol "Tidak" dipilih, tampilkan toast
-                            Toast.makeText(AddOrders.this, "Silahkan periksa data sebelum menyimpan", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                    // membuat tombol "Tidak" dengan listener
+                                    builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // jika tombol "Tidak" dipilih, tampilkan toast
+                                            Toast.makeText(AddOrders.this, "Silahkan periksa data sebelum menyimpan", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
 
-                    // menampilkan dialog konfirmasi
-                    builder.show();
-                }
+                                    // menampilkan dialog konfirmasi
+                                    builder.show();
+                                }
             }
         });
 

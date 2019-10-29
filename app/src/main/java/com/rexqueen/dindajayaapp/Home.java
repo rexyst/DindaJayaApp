@@ -42,10 +42,10 @@ public class Home extends AppCompatActivity {
         if (extras != null) {
             // mendapatkan nilai extra dari intent dengan kata kunci "page"
             getExtra = extras.getInt("page");
-            // jika nilai extra adalah 2
-            if (getExtra == 2) {
-                // menampilkan fragment daftar
-                navController.navigate(R.id.navigation_daftar);
+            // jika nilai extra adalah 1
+            if (getExtra == 1) {
+                // menampilkan fragment Home
+                navController.navigate(R.id.navigation_home);
             }
         }
 
