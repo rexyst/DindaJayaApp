@@ -26,3 +26,15 @@ Bismillah InsyaAllah Skripsi
 >>>Tampilkan data SQLite ke TableLayout
 >>
 >>add komen pada kode
+
+>Versi 1.5
+>>update SQLite table <br />
+>>move Fitur Daftar ke Home
+>>>update Fitur tambah pesanan <br />
+>>
+>>Optimasi UI Login
+
+>Versi 1.6
+>>update SQLite table <br />
+>>update UI Detail Pesanan <br />
+>>add Fitur tombol pada Detail Pesanan
