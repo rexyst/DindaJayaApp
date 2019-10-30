@@ -33,3 +33,8 @@ Bismillah InsyaAllah Skripsi
 >>>update Fitur tambah pesanan <br />
 >>
 >>Optimasi UI Login
+
+>Versi 1.6
+>>update SQLite table <br />
+>>update UI Detail Pesanan <br />
+>>add Fitur tombol pada Detail Pesanan

@@ -8,151 +8,244 @@
     android:orientation="vertical"
     android:layout_marginTop="20dp">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="left|center_vertical"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:textStyle="bold"></TextView>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama"
-            android:typeface="monospace"
-            android:id="@+id/nama"
-            android:layout_marginBottom="15dp"
-            android:inputType="text"></EditText>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jenis"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:textStyle="bold"></TextView>
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Seragam"
-                android:id="@+id/seragam"
-                android:typeface="monospace"
-                android:layout_marginRight="10dp"
-                android:onClick="onRadioButtonClicked"></RadioButton>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Atasan"
-                android:id="@+id/atasan"
-                android:typeface="monospace"
-                android:layout_marginRight="10dp"
-                android:onClick="onRadioButtonClicked"></RadioButton>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bawahan"
-                android:id="@+id/bawahan"
-                android:typeface="monospace"
-                android:onClick="onRadioButtonClicked"></RadioButton>
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tanggal Pesan"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:textStyle="bold"></TextView>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
+            android:orientation="vertical"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/tanggal"
-                android:layout_marginRight="15dp"
-                android:text="Pilih tanggal dengan tombol"
-                android:typeface="monospace"
-                android:textSize="16sp"></TextView>
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pilih Tanggal"
+                android:text="Nama"
+                android:textSize="16sp"
                 android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama"
+                android:typeface="monospace"
+                android:id="@+id/nama"
+                android:layout_marginBottom="15dp"
+                android:inputType="text"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seragam"
+                    android:id="@+id/seragam"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onRadioButtonClicked"></RadioButton>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atasan"
+                    android:id="@+id/atasan"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onRadioButtonClicked"></RadioButton>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bawahan"
+                    android:id="@+id/bawahan"
+                    android:typeface="monospace"
+                    android:onClick="onRadioButtonClicked"></RadioButton>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harga Satuan (Rp.)"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Harga Satuan"
+                android:id="@+id/harga"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:inputType="number"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+                <Button
+                    android:layout_width="48dp"
+                    android:onClick="decrement"
+                    android:text="-"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="48dp" />
+                <TextView
+                    android:textColor="#212121"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:typeface="monospace"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:id="@+id/jumlah"
+                    android:textSize="25dp"/>
+                <Button
+                    android:layout_width="48dp"
+                    android:onClick="increment"
+                    android:text="+"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pesan"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tanggal"
+                    android:layout_marginRight="15dp"
+                    android:text="Pilih tanggal dengan tombol"
+                    android:typeface="monospace"
+                    android:textSize="16sp"></TextView>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Tanggal"
+                    android:typeface="monospace"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
+                    android:id="@+id/tanggal_bt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"></Button>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No. HP"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor HP"
+                android:id="@+id/hp"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:inputType="phone"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Keterangan"
+                android:id="@+id/keterangan"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:inputType="text"></EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total (Rp.)"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total"
+                android:id="@+id/total"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:inputType="text"></TextView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addPesanan"
+                android:text="Tambah Pesanan"
+                android:typeface="monospace"
+                android:textSize="16sp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorAccent"
-                android:id="@+id/tanggal_bt"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"></Button>
+                android:textColor="@color/colorAccent"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/kembali"
+                android:text="Kembali"
+                android:layout_marginTop="15dp"
+                android:typeface="monospace"
+                android:textSize="16sp"
+                android:background="#d4423d"
+                android:textColor="@color/colorAccent"></Button>
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No. HP"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:textStyle="bold"></TextView>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nomor HP"
-            android:id="@+id/hp"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:layout_marginBottom="15dp"
-            android:inputType="phone"></EditText>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Keterangan"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:textStyle="bold"></TextView>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Keterangan"
-            android:id="@+id/keterangan"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            android:layout_marginBottom="15dp"
-            android:inputType="text"></EditText>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/addPesanan"
-            android:text="Tambah Pesanan"
-            android:typeface="monospace"
-            android:textSize="16sp"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/colorAccent"></Button>
-
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

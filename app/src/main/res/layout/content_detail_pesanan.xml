@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".DetailPesanan"
+    tools:showIn="@layout/detail_pesanan"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/foto"
+                android:layout_marginBottom="25dp"></ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor Pesanan"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor"
+                android:id="@+id/idPesan"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:id="@+id/nama"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis"
+                android:id="@+id/jenis"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumlah"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumlah"
+                android:id="@+id/jumlah"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor HP"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor"
+                android:id="@+id/hp"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pesan"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:id="@+id/tglPesan"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Selesai"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:id="@+id/tglSelesai"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Diambil"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:id="@+id/tglDiambil"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:id="@+id/keterangan"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Harga Satuan (Rp.)"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Harga Satuan"
+                android:id="@+id/harga"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total (Rp.)"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:id="@+id/total"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:typeface="monospace"
+                android:textSize="16sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:id="@+id/status"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"></TextView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diproses"
+                android:id="@+id/proses_bt"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="15dp"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selesai"
+                android:id="@+id/selesai_bt"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="15dp"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ambil Foto"
+                android:id="@+id/foto_bt"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginBottom="15dp"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diambil"
+                android:id="@+id/diambil_bt"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginBottom="15dp"></Button>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -30,11 +32,14 @@ public class AddOrders extends AppCompatActivity {
     DBHelper dbHelper;
 
     //inisiasi variabel dari View
-    EditText nama, keterangan, noHp;
+    EditText nama, keterangan, noHp, harga;
     RadioButton seragam, atasan, bawahan;
-    Button tanggal_bt, pesanan_bt;
-    TextView tgl;
+    Button tanggal_bt, pesanan_bt, kembali;
+    TextView tgl, jumlah, total;
     String jns, tanggal;
+
+    // inisiasi nilai standar jumlah
+    int jum = 1;
 
     // inisiasi variabel pendukung
     private DatePickerDialog datePickerDialog;
@@ -46,7 +51,7 @@ public class AddOrders extends AppCompatActivity {
         setContentView(R.layout.add_orders);
 
         // membuat format tanggal
-        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         // inisiasi nilai awal variabel
         jns = "0";
         tanggal = "x";
@@ -56,15 +61,36 @@ public class AddOrders extends AppCompatActivity {
         nama = findViewById(R.id.nama);
         keterangan = findViewById(R.id.keterangan);
         noHp = findViewById(R.id.hp);
+        harga = findViewById(R.id.harga);
         // button
         tanggal_bt = findViewById(R.id.tanggal_bt);
         pesanan_bt = findViewById(R.id.addPesanan);
+        kembali = findViewById(R.id.kembali);
         // textview
         tgl = findViewById(R.id.tanggal);
+        jumlah = findViewById(R.id.jumlah);
+        total = findViewById(R.id.total);
         // radio button
         seragam = findViewById(R.id.seragam);
         atasan = findViewById(R.id.atasan);
         bawahan = findViewById(R.id.bawahan);
+
+        // harga onchange listener
+        harga.addTextChangedListener(new TextWatcher() {
+
+            // ketika konten edittext harga berubah
+            public void afterTextChanged(Editable s) {
+                // dapatkan nilai harga
+                int hrg = Integer.parseInt(harga.getText().toString());
+                // kalikan jumlah dengan harga yang diinputkan
+                // lalu tampilkan ke textview total
+                total.setText(String.valueOf(jum*hrg));
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
 
         // menambahkan listener pada tombol tanggal
         tanggal_bt.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +148,12 @@ public class AddOrders extends AppCompatActivity {
                                 // apakah keterangan diisi?
                                 if (keterangan.getText().length() <= 0){
                                     keterangan.setError("Silahkan isi keterangan");
-                                } else {
+                                } else
+                                    // apakah harga kosong?
+                                    if (harga.getText().length() <= 0) {
+                                        Toast.makeText(AddOrders.this, "Harga Kosong", Toast.LENGTH_SHORT).show();
+                                        harga.setError("Silahkan mengisi Harga");
+                                    } else {
                                     // jika sudah lengkap
                                     // membuat dialog konfirmasi
                                     Builder builder = new Builder(AddOrders.this);
@@ -140,16 +171,18 @@ public class AddOrders extends AppCompatActivity {
                                             // lakukan percobaan
                                             try {
                                                 // mengeksekusi query menambahkan data ke database pada tabel "orders"
-                                                db.execSQL("insert into orders(nama, jenis, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, status) " +
+                                                db.execSQL("insert into orders(nama, jenis, jumlah, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, status) " +
                                                         "values(" +
                                                         "'"+nama.getText()+"', " +
                                                         "'"+jns+"', " +
+                                                        "'"+jum+"', " +
                                                         "'"+noHp.getText()+"', " +
                                                         "'"+tanggal+"', " +
-                                                        "'"+tanggal+"', " +
-                                                        "'"+tanggal+"', " +
+                                                        "'-', " +
+                                                        "'-', " +
                                                         "'"+keterangan.getText()+"', " +
-                                                        "'1')");
+                                                        "'"+harga.getText()+"', " +
+                                                        "'"+total.getText()+"', '1')");
 
                                                 // jika berhasil tampilkan toast
                                                 Toast.makeText(AddOrders.this, "Berhasil menambahkan pesanan", Toast.LENGTH_SHORT).show();
@@ -178,6 +211,17 @@ public class AddOrders extends AppCompatActivity {
                                     // menampilkan dialog konfirmasi
                                     builder.show();
                                 }
+            }
+        });
+
+        // menambahkan listener pada tombol kembali
+        kembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // beralih ke halaman Home
+                startActivity(new Intent(AddOrders.this, Home.class));
+                // dan mengakhiri activity AddOrders
+                finish();
             }
         });
 
@@ -215,4 +259,22 @@ public class AddOrders extends AppCompatActivity {
         }
     }
 
+
+    public void increment(View view) {
+        int hrg = Integer.parseInt(harga.getText().toString());
+        jumlah.setText(String.valueOf(jum+1));
+        jum += 1;
+        total.setText(String.valueOf(jum*hrg));
+    }
+
+    public void decrement(View view) {
+        int hrg = Integer.parseInt(harga.getText().toString());
+        if (jum > 1) {
+            jumlah.setText(String.valueOf(jum-1));
+            jum -= 1;
+            total.setText(String.valueOf(jum*hrg));
+        } else {
+            Toast.makeText(AddOrders.this, "Minimal pemesanan adalah 1", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

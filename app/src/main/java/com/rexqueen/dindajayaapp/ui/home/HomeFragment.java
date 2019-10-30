@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rexqueen.dindajayaapp.AddOrders;
+import com.rexqueen.dindajayaapp.DetailPesanan;
 import com.rexqueen.dindajayaapp.Home;
 import com.rexqueen.dindajayaapp.R;
 import com.rexqueen.dindajayaapp.model.DBHelper;
@@ -111,7 +112,7 @@ public class HomeFragment extends Fragment {
                 while (cursor.moveToNext()) {
                     // mengambil nilai perkolom
                     // mengambil nilai dari kolom "no" untuk ID
-                    int outlet_id= cursor.getInt(cursor.getColumnIndex("no"));
+                    final int outlet_id= cursor.getInt(cursor.getColumnIndex("idPesan"));
                     // mengambil nilai dari kolom "nama"
                     final String outlet_name= cursor.getString(cursor.getColumnIndex("nama"));
                     // mengambil nilai dari kolom "jenis"
@@ -151,7 +152,12 @@ public class HomeFragment extends Fragment {
                             if (outlet_status.equals("3")){
                                 // dikonversi menjadi "Selesai"
                                 outlet_status = "Selesai";
-                            }
+                            } else
+                                // jika nilai 4
+                                if (outlet_status.equals(4)) {
+                                    // dikonversi menjadi "Diambil"
+                                    outlet_status = "Diambil";
+                                }
 
                     // menyiapkan TableRow untuk ditampilkan ke TableView
                     TableRow row = new TableRow(root.getContext());
@@ -182,7 +188,9 @@ public class HomeFragment extends Fragment {
                         tv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(root.getContext(), outlet_name, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(root.getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
+                                // beralih halaman detail pesanan
+                                startActivity(new Intent(root.getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
                             }
                         });
                     }
