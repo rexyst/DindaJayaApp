@@ -9,7 +9,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // menyiapkan nama database yang akan dipakai
     private static final String DATABASE_NAME = "data_master.db";
     // menyiapkan versi database
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "keterangan text null, " +
                 "harga text null, " +
                 "total text null, " +
+                "urlFoto text null, " +
                 "status text null);";
         Log.d("Data", "onCreate: " + sql);
         // eksekusi query

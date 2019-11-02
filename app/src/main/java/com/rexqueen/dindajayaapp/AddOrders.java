@@ -171,7 +171,7 @@ public class AddOrders extends AppCompatActivity {
                                             // lakukan percobaan
                                             try {
                                                 // mengeksekusi query menambahkan data ke database pada tabel "orders"
-                                                db.execSQL("insert into orders(nama, jenis, jumlah, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, status) " +
+                                                db.execSQL("insert into orders(nama, jenis, jumlah, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, urlFoto, status) " +
                                                         "values(" +
                                                         "'"+nama.getText()+"', " +
                                                         "'"+jns+"', " +
@@ -182,7 +182,7 @@ public class AddOrders extends AppCompatActivity {
                                                         "'-', " +
                                                         "'"+keterangan.getText()+"', " +
                                                         "'"+harga.getText()+"', " +
-                                                        "'"+total.getText()+"', '1')");
+                                                        "'"+total.getText()+"', '-', '1')");
 
                                                 // jika berhasil tampilkan toast
                                                 Toast.makeText(AddOrders.this, "Berhasil menambahkan pesanan", Toast.LENGTH_SHORT).show();

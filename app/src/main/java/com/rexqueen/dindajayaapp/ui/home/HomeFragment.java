@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
                                 outlet_status = "Selesai";
                             } else
                                 // jika nilai 4
-                                if (outlet_status.equals(4)) {
+                                if (outlet_status.equals("4")) {
                                     // dikonversi menjadi "Diambil"
                                     outlet_status = "Diambil";
                                 }

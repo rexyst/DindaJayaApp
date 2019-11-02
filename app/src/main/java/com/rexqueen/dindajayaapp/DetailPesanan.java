@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,13 +15,19 @@ import com.rexqueen.dindajayaapp.model.DBHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +44,10 @@ public class DetailPesanan extends AppCompatActivity {
     int getExtra;
     Intent intent;
     String query, tanggal;
+    static final int REQUEST_TAKE_PHOTO = 9;
+    String currentPhotoPath;
+    int data_id;
+    Uri photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +60,7 @@ public class DetailPesanan extends AppCompatActivity {
         dbHelper = new DBHelper(DetailPesanan.this);
 
         //inisiasi array untuk menyimpan data dari database
-        data = new String[12];
+        data = new String[13];
 
         // mengambil nilai dari textview
         id = findViewById(R.id.idPesan);
@@ -110,26 +123,31 @@ public class DetailPesanan extends AppCompatActivity {
                 // memulai iterasi untuk mengambil data perbaris
                 if (cursor.moveToFirst()) {
                     // mengambil nilai perkolom
-                    int data_id = cursor.getInt(cursor.getColumnIndex("idPesan"));
+                    data_id = cursor.getInt(cursor.getColumnIndex("idPesan"));
                     data[0] = String.valueOf(data_id);
-                    for (int i = 1; i < 12; i++) {
+                    for (int i = 1; i < 13; i++) {
                         data[i] = cursor.getString(i);
-                        System.out.println("DATA :");
-                        System.out.println(data[i]);
+                    }
+
+                    // cek foto
+                    if (data[11].length() > 1) {
+                        currentPhotoPath = data[11];
+                        setPic();
+                        foto.setVisibility(View.VISIBLE);
                     }
 
                     // konversi nilai status
-                    if (data[11].equals("1")) {
-                        data[11] = "Menunggu";
+                    if (data[12].equals("1")) {
+                        data[12] = "Menunggu";
                     } else
-                    if (data[11].equals("2")) {
-                        data[11] = "Diproses";
+                    if (data[12].equals("2")) {
+                        data[12] = "Diproses";
                     } else
-                    if (data[11].equals("3")) {
-                        data[11] = "Selesai";
+                    if (data[12].equals("3")) {
+                        data[12] = "Selesai";
                     } else
-                    if (data[11].equals("4")) {
-                        data[11] = "Diambil";
+                    if (data[12].equals("4")) {
+                        data[12] = "Diambil";
                     }
 
                     // konversi nilai jenis
@@ -155,36 +173,36 @@ public class DetailPesanan extends AppCompatActivity {
                     keterangan.setText(data[8]);
                     harga.setText(data[9]);
                     total.setText(data[10]);
-                    status.setText(data[11]);
+                    status.setText(data[12]);
 
                     // cek status untuk menampilkan tombol yang sesuai
                     // status menunggu
-                    if (data[11].equals("Menunggu")) {
+                    if (data[12].equals("Menunggu")) {
                         diproses.setVisibility(View.VISIBLE);
                         selesai.setVisibility(View.GONE);
                         ambilFoto.setVisibility(View.GONE);
                         ambil.setVisibility(View.GONE);
                     } else
                         // status diproses
-                    if (data[11].equals("Diproses")) {
-                        diproses.setVisibility(View.GONE);
-                        selesai.setVisibility(View.VISIBLE);
-                        ambilFoto.setVisibility(View.GONE);
-                        ambil.setVisibility(View.GONE);
-                    } else
-                        // status selesai
-                    if (data[11].equals("Selesai")) {
-                        diproses.setVisibility(View.GONE);
-                        selesai.setVisibility(View.GONE);
-                        ambilFoto.setVisibility(View.VISIBLE);
-                        ambil.setVisibility(View.VISIBLE);
-                    } else {
-                        // status diambil
-                        diproses.setVisibility(View.GONE);
-                        selesai.setVisibility(View.GONE);
-                        ambilFoto.setVisibility(View.GONE);
-                        ambil.setVisibility(View.GONE);
-                    }
+                        if (data[12].equals("Diproses")) {
+                            diproses.setVisibility(View.GONE);
+                            selesai.setVisibility(View.VISIBLE);
+                            ambilFoto.setVisibility(View.GONE);
+                            ambil.setVisibility(View.GONE);
+                        } else
+                            // status selesai
+                            if (data[12].equals("Selesai")) {
+                                diproses.setVisibility(View.GONE);
+                                selesai.setVisibility(View.GONE);
+                                ambilFoto.setVisibility(View.VISIBLE);
+                                ambil.setVisibility(View.VISIBLE);
+                            } else {
+                                // status diambil
+                                diproses.setVisibility(View.GONE);
+                                selesai.setVisibility(View.GONE);
+                                ambilFoto.setVisibility(View.GONE);
+                                ambil.setVisibility(View.GONE);
+                            }
 
                     // menambahkan listener untuk tombol diproses
                     diproses.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +230,26 @@ public class DetailPesanan extends AppCompatActivity {
                     ambilFoto.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            // Ensure that there's a camera activity to handle the intent
+                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                // Create the File where the photo should go
+                                File photoFile = null;
+                                try {
+                                    photoFile = createImageFile();
+                                } catch (IOException ex) {
 
+                                }
+                                // Continue only if the File was successfully created
+                                if (photoFile != null) {
+                                    Uri photoURI = FileProvider.getUriForFile(DetailPesanan.this,
+                                            "com.rexqueen.dindajayaapp.fileprovider",
+                                            photoFile);
+                                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoURI);
+                                    photoPath = photoURI;
+                                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                                }
+                            }
                         }
                     });
 
@@ -250,7 +287,7 @@ public class DetailPesanan extends AppCompatActivity {
         // Mengambil database untuk dibaca
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try {
-        db.update("orders", cv, "idPesan="+idPesan, null);
+            db.update("orders", cv, "idPesan="+idPesan, null);
             Toast.makeText(DetailPesanan.this, "Berhasil memperbarui status", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(DetailPesanan.this, "Berhasil memperbarui status", Toast.LENGTH_SHORT).show();
@@ -270,5 +307,91 @@ public class DetailPesanan extends AppCompatActivity {
             Toast.makeText(DetailPesanan.this, "Berhasil memperbarui tanggal", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void setUriFoto(int idPesan, String uri){
+        ContentValues cv = new ContentValues();
+        cv.put("urlFoto", uri);
+        // Mengambil database untuk dibaca
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            db.update("orders", cv, "idPesan="+idPesan, null);
+        } catch (Exception e) {
+            Toast.makeText(DetailPesanan.this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {;
+            try {
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoPath);
+                foto.setImageBitmap(imageBitmap);
+                foto.setVisibility(View.VISIBLE);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            //tampilkan foto ke galeri
+            galleryAddPic();
+
+            // memasukkan url foto
+            setUriFoto(data_id, currentPhotoPath);
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "DJA_IMG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(currentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = foto.getMaxWidth();
+        int targetH = foto.getMaxHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        File image = new File(currentPhotoPath);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
+        foto.setImageBitmap(bitmap);
     }
 }
