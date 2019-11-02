@@ -37,4 +37,4 @@ Bismillah InsyaAllah Skripsi
 >Versi 1.6
 >>update SQLite table <br />
 >>update UI Detail Pesanan <br />
->>add Fitur tombol pada Detail Pesanan
+>>add fungsi tombol pada Detail Pesanan
