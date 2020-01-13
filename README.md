@@ -38,3 +38,6 @@ Bismillah InsyaAllah Skripsi
 >>update SQLite table <br />
 >>update UI Detail Pesanan <br />
 >>add Fitur tombol pada Detail Pesanan
+
+>Versi 1.7
+>>update fitur Detail Pesanan
