@@ -44,19 +44,19 @@
             android:paddingLeft="20dp"></Button>
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/backup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/menu_logout"
+            android:text="@string/menu_backup"
             android:background="@color/colorAccent"
             android:textAlignment="textStart"
             android:paddingLeft="20dp"></Button>
 
         <Button
-            android:id="@+id/minimize"
+            android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/menu_min"
+            android:text="@string/menu_logout"
             android:background="@color/colorAccent"
             android:textAlignment="textStart"
             android:paddingLeft="20dp"></Button>

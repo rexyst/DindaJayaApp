@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Dinda Jaya App</string>
-    <string name="app_ver">v1.7</string>
+    <string name="app_ver">v1.8</string>
     <string name="title_activity_home">Home</string>
-    <string name="app_home">Home</string>
+    <string name="app_home">Beranda</string>
     <string name="app_daftar">Daftar</string>
     <string name="app_menu">Menu</string>
     <string name="login_alert">*Hanya pemilik konveksi yang dapat melakukan login.</string>
-    <string name="menu_min">Minimalkan Aplikasi</string>
     <string name="menu_logout">Logout</string>
+    <string name="menu_backup">Backup Data</string>
     <string name="menu_tentang">Tentang</string>
     <string name="menu_tutorial">Tutorial</string>
-    <string name="app_info">Aplikasi ini dibuat untuk membantu mempermudah pengelolaan pesanan di konveksi Dinda Jaya.</string>
+    <string name="app_info">Aplikasi ini dibuat untuk membantu mempermudah pengelolaan pesanan di Dinda Jaya Tailor.</string>
     <string name="deve_info">dibuat oleh:</string>
     <string name="deve_name">Ahmad Firdaus A.</string>
     <string name="deve_corp">Rex Corp</string>

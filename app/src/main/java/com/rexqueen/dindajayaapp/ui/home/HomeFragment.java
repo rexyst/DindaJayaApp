@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
         try
         {
             // menyiapkan query
-            String selectQuery = "SELECT * FROM orders";
+            String selectQuery = "SELECT * FROM orders where `status`!=4";
             // menyiapkan cursor untuk membaca nilai
             Cursor cursor = db.rawQuery(selectQuery,null);
             // jika jumlah baris lebih dari 0

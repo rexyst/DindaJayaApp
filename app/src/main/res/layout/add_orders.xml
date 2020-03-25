@@ -91,7 +91,8 @@
                 android:textSize="16sp"
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
-                android:inputType="number"></EditText>
+                android:inputType="number"
+                android:maxLength="13"></EditText>
 
             <TextView
                 android:layout_width="wrap_content"

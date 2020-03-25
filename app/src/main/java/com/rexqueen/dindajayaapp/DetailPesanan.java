@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.rexqueen.dindajayaapp.model.DBHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,10 +41,9 @@ public class DetailPesanan extends AppCompatActivity {
     int getExtra;
     Intent intent;
     String query, tanggal;
-    static final int REQUEST_TAKE_PHOTO = 9;
+    static final int REQUEST_TAKE_PHOTO = 1;
     String currentPhotoPath;
     int data_id;
-    Uri photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +80,6 @@ public class DetailPesanan extends AppCompatActivity {
 
         // mengambil nilai dari imageview
         foto = findViewById(R.id.foto);
-
-        // menyembunyikan Foto
-        foto.setVisibility(View.GONE);
 
         // menambahkan listener pada floating button
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -127,13 +120,6 @@ public class DetailPesanan extends AppCompatActivity {
                     data[0] = String.valueOf(data_id);
                     for (int i = 1; i < 13; i++) {
                         data[i] = cursor.getString(i);
-                    }
-
-                    // cek foto
-                    if (data[11].length() > 1) {
-                        currentPhotoPath = data[11];
-                        setPic();
-                        foto.setVisibility(View.VISIBLE);
                     }
 
                     // konversi nilai status
@@ -230,7 +216,7 @@ public class DetailPesanan extends AppCompatActivity {
                     ambilFoto.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent takePictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             // Ensure that there's a camera activity to handle the intent
                             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                                 // Create the File where the photo should go
@@ -238,15 +224,15 @@ public class DetailPesanan extends AppCompatActivity {
                                 try {
                                     photoFile = createImageFile();
                                 } catch (IOException ex) {
-
+                                    // Error occurred while creating the File
+                                    Toast.makeText(DetailPesanan.this, "Gagal Membuat File", Toast.LENGTH_SHORT).show();
                                 }
                                 // Continue only if the File was successfully created
                                 if (photoFile != null) {
                                     Uri photoURI = FileProvider.getUriForFile(DetailPesanan.this,
                                             "com.rexqueen.dindajayaapp.fileprovider",
                                             photoFile);
-                                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoURI);
-                                    photoPath = photoURI;
+                                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
                                 }
                             }
@@ -264,6 +250,14 @@ public class DetailPesanan extends AppCompatActivity {
                             finish();
                         }
                     });
+
+                    // cek foto
+                    if (data[11].length() > 1) {
+                        currentPhotoPath = data[11];
+                        setPic();
+                    } else {
+                        foto.setImageResource(R.drawable.default_img);
+                    }
 
                 }
 
@@ -309,46 +303,10 @@ public class DetailPesanan extends AppCompatActivity {
 
     }
 
-    private void setUriFoto(int idPesan, String uri){
-        ContentValues cv = new ContentValues();
-        cv.put("urlFoto", uri);
-        // Mengambil database untuk dibaca
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        try {
-            db.update("orders", cv, "idPesan="+idPesan, null);
-        } catch (Exception e) {
-            Toast.makeText(DetailPesanan.this, e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {;
-            try {
-                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoPath);
-                foto.setImageBitmap(imageBitmap);
-                foto.setVisibility(View.VISIBLE);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            //tampilkan foto ke galeri
-            galleryAddPic();
-
-            // memasukkan url foto
-            setUriFoto(data_id, currentPhotoPath);
-        }
-    }
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "DJA_IMG_" + timeStamp + "_";
+        String imageFileName = "DINDA_JAYA_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -361,6 +319,19 @@ public class DetailPesanan extends AppCompatActivity {
         return image;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT);
+//            foto.setImageBitmap(imageBitmap);
+            setPic();
+            setUriFoto(getExtra, currentPhotoPath);
+            galleryAddPic();
+        }
+    }
+
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(currentPhotoPath);
@@ -370,28 +341,116 @@ public class DetailPesanan extends AppCompatActivity {
     }
 
     private void setPic() {
-        // Get the dimensions of the View
-        int targetW = foto.getMaxWidth();
-        int targetH = foto.getMaxHeight();
+//        // Get the dimensions of the View
+//        int targetW = foto.getWidth();
+//        int targetH = foto.getHeight();
+//
+//        // Get the dimensions of the bitmap
+//        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//        bmOptions.inJustDecodeBounds = true;
+//
+//        int photoW = bmOptions.outWidth;
+//        int photoH = bmOptions.outHeight;
+//
+//        // Determine how much to scale down the image
+////        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+//        int scaleFactor = photoH/targetH;
+//
+//        // Decode the image file into a Bitmap sized to fill the View
+//        bmOptions.inJustDecodeBounds = false;
 
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        File image = new File(currentPhotoPath);
-
-        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
-        foto.setImageBitmap(bitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 300, 400, false);
+        foto.setImageBitmap(scaled);
     }
+
+
+
+    private void setUriFoto(int idPesan, String uri){
+        ContentValues cv = new ContentValues();
+        cv.put("urlFoto", uri);
+
+        // Mengambil database untuk dibaca
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            db.update("orders", cv, "idPesan="+idPesan, null);
+            status.setText(uri);
+        } catch (Exception e) {
+            Toast.makeText(DetailPesanan.this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {;
+//            try {
+//                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoPath);
+//                currentPhotoPath = String.valueOf(photoPath);
+//                newPath = currentPhotoPath.replace("com.rexqueen.dindajayaapp/my_images/Pictures/", "com.android.externalstorage.documents/document/primary#3AAndroid%2Fdata%2Fcom.rexqueen.dindajayaapp%2Ffiles%2FPictures%2F");
+//                setPic(currentPhotoPath);
+//                System.out.println("Photo Path : "+currentPhotoPath);
+//                foto.setVisibility(View.VISIBLE);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            //tampilkan foto ke galeri
+//            galleryAddPic();
+//
+//            // memasukkan url foto
+//            setUriFoto(data_id, currentPhotoPath);
+//        }
+//    }
+//
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "DJA_IMG_" + timeStamp + "_";
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                storageDir      /* directory */
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        currentPhotoPath = image.getAbsolutePath();
+//        return image;
+//    }
+//
+//    private void galleryAddPic() {
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File f = new File(currentPhotoPath);
+//        Uri contentUri = Uri.fromFile(f);
+//        mediaScanIntent.setData(contentUri);
+//        this.sendBroadcast(mediaScanIntent);
+//    }
+//
+//    private void setPic(String path) {
+//        // Get the dimensions of the View
+//        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+//        int targetW = (int) (screenWidth - (screenWidth * 0.1));
+//        int targetH = (int) (screenWidth - (screenWidth * 0.1));
+//
+//        // Get the dimensions of the bitmap
+//        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//        bmOptions.inJustDecodeBounds = true;
+//
+//        int photoW = bmOptions.outWidth;
+//        int photoH = bmOptions.outHeight;
+//
+//        // Determine how much to scale down the image
+//        int scaleFactor = 4;
+//
+//        // Decode the image file into a Bitmap sized to fill the View
+//        bmOptions.inJustDecodeBounds = false;
+//        bmOptions.inSampleSize = scaleFactor;
+//
+//        File image = new File(path);
+//
+//        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
+//        foto.setImageBitmap(bitmap);
+//    }
+
 }
