@@ -44,6 +44,6 @@ Bismillah InsyaAllah Skripsi
 
 >Versi 1.8
 >>fix foto tidak muncul di detail pesanan
->>update fitur daftar: berubah menjadi tampilan daftar pesanan yang sudah diambil
->>update fitur home: hanya menampilkan pesanan yang belum diambil
+>>update fitur daftar: berubah menjadi tampilan daftar pesanan yang sudah diambil <br />
+>>update fitur home: hanya menampilkan pesanan yang belum diambil <br />
 >>add fitur backup database to file [beta]
