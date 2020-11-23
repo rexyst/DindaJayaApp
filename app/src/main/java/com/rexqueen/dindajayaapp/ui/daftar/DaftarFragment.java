@@ -1,5 +1,7 @@
 package com.rexqueen.dindajayaapp.ui.daftar;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,8 +40,12 @@ import com.rexqueen.dindajayaapp.model.DBHelper;
 import com.rexqueen.dindajayaapp.ui.home.HomeViewModel;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.widget.GridLayout.spec;
 
@@ -51,9 +58,16 @@ public class DaftarFragment extends Fragment {
     Intent intent;
     Home home;
     TableLayout tableLayout;
+    String tgl, nowDate;
+    TextView tanggal;
 
     private HomeViewModel homeViewModel;
 
+    // inisiasi variabel pendukung
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
+
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -72,9 +86,81 @@ public class DaftarFragment extends Fragment {
         // insiasi class Home
         home = new Home();
 
+        // membuat format tanggal
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+//        inisiasi variabel tanggal
+        tanggal = root.findViewById(R.id.dates);
+
+//        mengisi nilai tanggal
+        nowDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        tanggal.setText("Tanpa filter");
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        // menambahkan listener pada tombol tanggal
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableLayout.removeAllViewsInLayout();
+                tanggal.setText("Tanpa filter");
+                getList(1);
+            }
+        });
+
+        FloatingActionButton fac = root.findViewById(R.id.fac);
+        // menambahkan listener pada tombol tanggal
+        fac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // mendapatkan kalender
+                Calendar newCalendar = Calendar.getInstance();
+
+                // inisiasi datePickerDialog untuk menampilkan pemilihan tanggal
+                datePickerDialog = new DatePickerDialog(root.getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        // method ini dijalankan ketika tanggal sudah dipilih
+                        // mengambil nilai tanggal yang sudah dipilih
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, monthOfYear, dayOfMonth);
+
+                        // menampilkan nilai tanggal pada textview
+                        tanggal.setText(dateFormatter.format(newDate.getTime()));
+                        // menyimpan nilai tanggal pada variabel tanggal
+                        tgl = dateFormatter.format(newDate.getTime());
+
+                        tableLayout.removeAllViewsInLayout();
+                        getList(0);
+
+                    }
+
+                },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+                // menampilkan dialog pemilihan tanggal
+                datePickerDialog.show();
+            }
+        });
+
+        getList(1);
+
+        return root;
+    }
+
+    void getList(int z){
+        // menyiapkan query
+        String selectQuery;
+        // konversi tanggal
+        String a = String.valueOf(tanggal.getText());
+        if (z==0){
+            selectQuery = "SELECT * FROM orders where `status`=4 and `tglPesan`='"+a+"'";
+        } else {
+            selectQuery = "SELECT * FROM orders where `status`=4";
+        }
         // mebuat header pada TableLayout
         // mendapatkan nilai TableRow dari TableLayout
-        TableRow rowHeader = new TableRow(root.getContext());
+        TableRow rowHeader = new TableRow(getContext());
         // mengubah warna pada header
         rowHeader.setBackgroundColor(Color.parseColor("#f6c89f"));
         // mengubah parameter layout pada view untuk Header
@@ -84,7 +170,7 @@ public class DaftarFragment extends Fragment {
         String[] headerText={"ID","Nama","Jenis","Status"};
         // memulai iterasi untuk membuat Header per-kolom
         for(String c:headerText) {
-            TextView tv = new TextView(root.getContext());
+            TextView tv = new TextView(getContext());
             tv.setTextColor(Color.parseColor("#000000"));
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
@@ -104,8 +190,7 @@ public class DaftarFragment extends Fragment {
         // mencoba menjalankan query
         try
         {
-            // menyiapkan query
-            String selectQuery = "SELECT * FROM orders where `status`=4";
+
             // menyiapkan cursor untuk membaca nilai
             Cursor cursor = db.rawQuery(selectQuery,null);
             // jika jumlah baris lebih dari 0
@@ -163,7 +248,7 @@ public class DaftarFragment extends Fragment {
                                 }
 
                     // menyiapkan TableRow untuk ditampilkan ke TableView
-                    TableRow row = new TableRow(root.getContext());
+                    TableRow row = new TableRow(getContext());
                     // menyiapkan parameter view
                     row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                             TableLayout.LayoutParams.WRAP_CONTENT));
@@ -179,7 +264,7 @@ public class DaftarFragment extends Fragment {
                     String[] colText={outlet_id+"",outlet_name,outlet_jenis,outlet_status};
                     // memulai iterasi untuk menambahkan kolom
                     for(String text:colText) {
-                        TextView tv = new TextView(root.getContext());
+                        TextView tv = new TextView(getContext());
                         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         tv.setGravity(Gravity.CENTER);
@@ -191,9 +276,9 @@ public class DaftarFragment extends Fragment {
                         tv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(root.getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
                                 // beralih halaman detail pesanan
-                                startActivity(new Intent(root.getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
+                                startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
                             }
                         });
                     }
@@ -211,7 +296,7 @@ public class DaftarFragment extends Fragment {
         catch (SQLiteException e)
         {
             // tampilkan toast dengan pesan error
-            Toast.makeText(root.getContext(), "Gagal terhubung ke database. Error: "+e, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Gagal terhubung ke database. Error: "+e, Toast.LENGTH_LONG).show();
         }
         finally
         {
@@ -220,7 +305,5 @@ public class DaftarFragment extends Fragment {
             // dan menutup koneksi dengan database untuk menghemat resource yang digunakan
             db.close();
         }
-
-        return root;
     }
 }

@@ -15,7 +15,7 @@ public class About extends AppCompatActivity {
     TextView contact;
     Intent intent;
     String dev_cont;
-    Button kembali_bt;
+    Button kembali_bt, ubahPin_bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class About extends AppCompatActivity {
         contact = findViewById(R.id.dev_contact);
         // mengambil nilai dari tombol kembali
         kembali_bt = findViewById(R.id.kembali_bt);
+        // mengambil nilai dari tombol ubah pin
+        ubahPin_bt = findViewById(R.id.chpin_bt);
         // menyiapkan URL kontak
         dev_cont = "https://bit.ly/Rex1054";
 
@@ -49,6 +51,14 @@ public class About extends AppCompatActivity {
                 startActivity(intent);
                 // menutup activity About
                 finish();
+            }
+        });
+
+        ubahPin_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(About.this, ChPin.class);
+                startActivity(intent);
             }
         });
 

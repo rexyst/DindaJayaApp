@@ -9,15 +9,37 @@
     android:paddingRight="15dp"
     android:gravity="top">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="left"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal : "
+            android:textSize="16dp"
+            android:layout_gravity="left"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal"
+            android:id="@+id/dates"
+            android:textSize="16dp"
+            android:layout_gravity="left"></TextView>
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView">
+        android:layout_marginTop="51dp">
 
         <TableLayout
+            android:id="@+id/tb_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/tb_data"
             android:stretchColumns="*"></TableLayout>
 
     </ScrollView>
@@ -38,6 +60,24 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/ic_plus_wh" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|start">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/ic_date"
+            android:tint="#ffffff"/>
     </RelativeLayout>
 
 </RelativeLayout>

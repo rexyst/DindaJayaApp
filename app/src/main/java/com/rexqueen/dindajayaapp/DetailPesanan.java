@@ -33,7 +33,7 @@ import java.util.Locale;
 public class DetailPesanan extends AppCompatActivity {
 
     // inisiasi variabel
-    TextView id, nama, jenis, jumlah, hp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, status;
+    TextView id, nama, jenis, ukuran, jumlah, hp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, status;
     Button selesai, ambil, diproses, ambilFoto;
     ImageView foto;
     DBHelper dbHelper;
@@ -56,12 +56,13 @@ public class DetailPesanan extends AppCompatActivity {
         dbHelper = new DBHelper(DetailPesanan.this);
 
         //inisiasi array untuk menyimpan data dari database
-        data = new String[13];
+        data = new String[14];
 
         // mengambil nilai dari textview
         id = findViewById(R.id.idPesan);
         nama = findViewById(R.id.nama);
         jenis = findViewById(R.id.jenis);
+        ukuran = findViewById(R.id.ukuran);
         jumlah = findViewById(R.id.jumlah);
         hp = findViewById(R.id.hp);
         tglPesan = findViewById(R.id.tglPesan);
@@ -96,7 +97,7 @@ public class DetailPesanan extends AppCompatActivity {
         // mengecek apakah extra tidak kosong
         if (extras != null) {
             // mendapatkan nilai extra dari intent dengan kata kunci "page"
-            getExtra = extras.getInt("idOrder");
+            getExtra = Integer.parseInt(extras.getString("idOrder"));
             query = "SELECT * FROM orders where idPesan = "+getExtra;
         }
 
@@ -118,22 +119,22 @@ public class DetailPesanan extends AppCompatActivity {
                     // mengambil nilai perkolom
                     data_id = cursor.getInt(cursor.getColumnIndex("idPesan"));
                     data[0] = String.valueOf(data_id);
-                    for (int i = 1; i < 13; i++) {
+                    for (int i = 1; i < 14; i++) {
                         data[i] = cursor.getString(i);
                     }
 
                     // konversi nilai status
-                    if (data[12].equals("1")) {
-                        data[12] = "Menunggu";
+                    if (data[13].equals("1")) {
+                        data[13] = "Menunggu";
                     } else
-                    if (data[12].equals("2")) {
-                        data[12] = "Diproses";
+                    if (data[13].equals("2")) {
+                        data[13] = "Diproses";
                     } else
-                    if (data[12].equals("3")) {
-                        data[12] = "Selesai";
+                    if (data[13].equals("3")) {
+                        data[13] = "Selesai";
                     } else
-                    if (data[12].equals("4")) {
-                        data[12] = "Diambil";
+                    if (data[13].equals("4")) {
+                        data[13] = "Diambil";
                     }
 
                     // konversi nilai jenis
@@ -147,37 +148,49 @@ public class DetailPesanan extends AppCompatActivity {
                         data[2] = "Bawahan";
                     }
 
+                    // konversi nilai ukuran
+                    if (data[3].equals("1")) {
+                        data[3] = "Anak-anak";
+                    } else
+                    if (data[3].equals("2")) {
+                        data[3] = "Dewasa";
+                    } else
+                    if (data[3].equals("3")) {
+                        data[3] = "Extra";
+                    }
+
                     // menampilkan data dari array ke textview
                     id.setText(data[0]);
                     nama.setText(data[1]);
                     jenis.setText(data[2]);
-                    jumlah.setText(data[3]);
-                    hp.setText(data[4]);
-                    tglPesan.setText(data[5]);
-                    tglSelesai.setText(data[6]);
-                    tglAmbil.setText(data[7]);
-                    keterangan.setText(data[8]);
-                    harga.setText(data[9]);
-                    total.setText(data[10]);
-                    status.setText(data[12]);
+                    ukuran.setText(data[3]);
+                    jumlah.setText(data[4]);
+                    hp.setText(data[5]);
+                    tglPesan.setText(data[6]);
+                    tglSelesai.setText(data[7]);
+                    tglAmbil.setText(data[8]);
+                    keterangan.setText(data[9]);
+                    harga.setText(data[10]);
+                    total.setText(data[11]);
+                    status.setText(data[13]);
 
                     // cek status untuk menampilkan tombol yang sesuai
                     // status menunggu
-                    if (data[12].equals("Menunggu")) {
+                    if (data[13].equals("Menunggu")) {
                         diproses.setVisibility(View.VISIBLE);
                         selesai.setVisibility(View.GONE);
                         ambilFoto.setVisibility(View.GONE);
                         ambil.setVisibility(View.GONE);
                     } else
                         // status diproses
-                        if (data[12].equals("Diproses")) {
+                        if (data[13].equals("Diproses")) {
                             diproses.setVisibility(View.GONE);
                             selesai.setVisibility(View.VISIBLE);
                             ambilFoto.setVisibility(View.GONE);
                             ambil.setVisibility(View.GONE);
                         } else
                             // status selesai
-                            if (data[12].equals("Selesai")) {
+                            if (data[13].equals("Selesai")) {
                                 diproses.setVisibility(View.GONE);
                                 selesai.setVisibility(View.GONE);
                                 ambilFoto.setVisibility(View.VISIBLE);
@@ -252,8 +265,8 @@ public class DetailPesanan extends AppCompatActivity {
                     });
 
                     // cek foto
-                    if (data[11].length() > 1) {
-                        currentPhotoPath = data[11];
+                    if (data[12].length() > 1) {
+                        currentPhotoPath = data[12];
                         setPic();
                     } else {
                         foto.setImageResource(R.drawable.default_img);

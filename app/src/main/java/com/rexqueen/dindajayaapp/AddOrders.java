@@ -33,10 +33,11 @@ public class AddOrders extends AppCompatActivity {
 
     //inisiasi variabel dari View
     EditText nama, keterangan, noHp, harga;
-    RadioButton seragam, atasan, bawahan;
+    RadioButton seragam, atasan, bawahan, anak, dewasa, xtra;
     Button tanggal_bt, pesanan_bt, kembali;
     TextView tgl, jumlah, total;
-    String jns, tanggal;
+    String tanggal;
+    int jns, ukuran;
 
     // inisiasi nilai standar jumlah
     int jum = 1;
@@ -53,7 +54,7 @@ public class AddOrders extends AppCompatActivity {
         // membuat format tanggal
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         // inisiasi nilai awal variabel
-        jns = "0";
+        jns = 0;
         tanggal = "x";
 
         // mendapatkan nilai dari view
@@ -74,6 +75,9 @@ public class AddOrders extends AppCompatActivity {
         seragam = findViewById(R.id.seragam);
         atasan = findViewById(R.id.atasan);
         bawahan = findViewById(R.id.bawahan);
+        anak = findViewById(R.id.anak);
+        dewasa = findViewById(R.id.dewasa);
+        xtra = findViewById(R.id.extra);
 
         // harga onchange listener
         harga.addTextChangedListener(new TextWatcher() {
@@ -133,7 +137,7 @@ public class AddOrders extends AppCompatActivity {
                     nama.setError("Nama tidak boleh kosong");
                 } else
                     // apakah jenis sudah dipilih?
-                    if (Integer.parseInt(jns) == 0) {
+                    if (jns == 0) {
                         Toast.makeText(AddOrders.this, "Silahkan pilih jenis pesanan", Toast.LENGTH_SHORT).show();
                     } else
                         // apakah tanggal sudah dipilih?
@@ -171,11 +175,12 @@ public class AddOrders extends AppCompatActivity {
                                             // lakukan percobaan
                                             try {
                                                 // mengeksekusi query menambahkan data ke database pada tabel "orders"
-                                                db.execSQL("insert into orders(nama, jenis, jumlah, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, urlFoto, status) " +
+                                                db.execSQL("insert into orders(nama, jenis, ukuran, jumlah, noHp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, urlFoto, status) " +
                                                         "values(" +
                                                         "'"+nama.getText()+"', " +
-                                                        "'"+jns+"', " +
-                                                        "'"+jum+"', " +
+                                                        ""+jns+", " +
+                                                        ""+ukuran+", " +
+                                                        ""+jum+", " +
                                                         "'"+noHp.getText()+"', " +
                                                         "'"+tanggal+"', " +
                                                         "'-', " +
@@ -190,6 +195,7 @@ public class AddOrders extends AppCompatActivity {
                                                 startActivity(new Intent(AddOrders.this, Home.class).putExtra("page", 1));
                                                 // tutup activity AddOrders
                                                 finish();
+                                                db.close();
                                             } catch (Exception e) {
                                                 // jika gagal tampilkan toast dengan pesan error dari consol
                                                 System.out.println(e);
@@ -238,21 +244,21 @@ public class AddOrders extends AppCompatActivity {
             case R.id.seragam:
                 if (checked)
                     // ubah nilai variabel jns menjadi 1
-                    this.jns = "1";
+                    this.jns = 1;
                 // tampilkan toast untuk radio button yang dipilih
                 Toast.makeText(AddOrders.this, "Seragam", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.atasan:
                 if (checked)
                     // ubah nilai variabel jns menjadi 2
-                    this.jns = "2";
+                    this.jns = 2;
                 // tampilkan toast untuk radio button yang dipilih
                 Toast.makeText(AddOrders.this, "Atasan", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bawahan:
                 if (checked)
                     // ubah nilai variabel jns menjadi 3
-                    this.jns = "3";
+                    this.jns = 3;
                 // tampilkan toast untuk radio button yang dipilih
                 Toast.makeText(AddOrders.this, "Bawahan", Toast.LENGTH_SHORT).show();
                 break;
@@ -275,6 +281,37 @@ public class AddOrders extends AppCompatActivity {
             total.setText(String.valueOf(jum*hrg));
         } else {
             Toast.makeText(AddOrders.this, "Minimal pemesanan adalah 1", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onRadioButtonClickedd(View view) {
+        // apakah radio button ada yang dipilih?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // jika iya cari radio button yang dipilih untuk diambil nilainya
+        switch(view.getId()) {
+            // seragam dipilih
+            case R.id.anak:
+                if (checked)
+                    // ubah nilai variabel jns menjadi 1
+                    this.ukuran = 1;
+                // tampilkan toast untuk radio button yang dipilih
+                Toast.makeText(AddOrders.this, "anak dipilih", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.dewasa:
+                if (checked)
+                    // ubah nilai variabel jns menjadi 2
+                    this.ukuran = 2;
+                // tampilkan toast untuk radio button yang dipilih
+                Toast.makeText(AddOrders.this, "dewasa dipilih", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.extra:
+                if (checked)
+                    // ubah nilai variabel jns menjadi 3
+                    this.ukuran = 3;
+                // tampilkan toast untuk radio button yang dipilih
+                Toast.makeText(AddOrders.this, "extra dipilih", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 }

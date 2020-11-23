@@ -26,7 +26,7 @@
                 android:text="Nama"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:typeface="monospace"
                 android:id="@+id/nama"
                 android:layout_marginBottom="15dp"
-                android:inputType="text"></EditText>
+                android:inputType="text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:text="Jenis"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:id="@+id/seragam"
                     android:typeface="monospace"
                     android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClicked"></RadioButton>
+                    android:onClick="onRadioButtonClicked"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,14 +65,52 @@
                     android:id="@+id/atasan"
                     android:typeface="monospace"
                     android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClicked"></RadioButton>
+                    android:onClick="onRadioButtonClicked"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bawahan"
                     android:id="@+id/bawahan"
                     android:typeface="monospace"
-                    android:onClick="onRadioButtonClicked"></RadioButton>
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukuran"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anak-anak"
+                    android:id="@+id/anak"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onRadioButtonClickedd"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dewasa"
+                    android:id="@+id/dewasa"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"
+                    android:onClick="onRadioButtonClickedd"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extra"
+                    android:id="@+id/extra"
+                    android:typeface="monospace"
+                    android:onClick="onRadioButtonClickedd"/>
             </RadioGroup>
 
             <TextView
@@ -81,7 +119,7 @@
                 android:text="Harga Satuan (Rp.)"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -92,7 +130,7 @@
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
                 android:inputType="number"
-                android:maxLength="13"></EditText>
+                android:maxLength="13"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,7 +138,7 @@
                 android:text="Jumlah"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -140,7 +178,7 @@
                 android:text="Tanggal Pesan"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,7 +193,7 @@
                     android:layout_marginRight="15dp"
                     android:text="Pilih tanggal dengan tombol"
                     android:typeface="monospace"
-                    android:textSize="16sp"></TextView>
+                    android:textSize="16sp"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -166,7 +204,7 @@
                     android:textColor="@color/colorAccent"
                     android:id="@+id/tanggal_bt"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"></Button>
+                    android:paddingRight="10dp"/>
 
             </LinearLayout>
 
@@ -176,7 +214,7 @@
                 android:text="No. HP"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -186,7 +224,7 @@
                 android:textSize="16sp"
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
-                android:inputType="phone"></EditText>
+                android:inputType="phone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,7 +232,7 @@
                 android:text="Keterangan"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -204,7 +242,7 @@
                 android:textSize="16sp"
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
-                android:inputType="text"></EditText>
+                android:inputType="text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -212,7 +250,7 @@
                 android:text="Total (Rp.)"
                 android:textSize="16sp"
                 android:typeface="monospace"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -222,7 +260,7 @@
                 android:textSize="20sp"
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
-                android:inputType="text"></TextView>
+                android:inputType="text"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -232,7 +270,7 @@
                 android:typeface="monospace"
                 android:textSize="16sp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorAccent"></Button>
+                android:textColor="@color/colorAccent"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -243,7 +281,7 @@
                 android:typeface="monospace"
                 android:textSize="16sp"
                 android:background="#d4423d"
-                android:textColor="@color/colorAccent"></Button>
+                android:textColor="@color/colorAccent"/>
 
         </LinearLayout>
 

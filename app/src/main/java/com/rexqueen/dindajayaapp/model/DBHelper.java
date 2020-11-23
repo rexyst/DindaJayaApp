@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // menyiapkan nama database yang akan dipakai
     private static final String DATABASE_NAME = "dinda_jaya.db";
     // menyiapkan versi database
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 14;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,21 +32,33 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "create table orders (" +
                 "idPesan integer primary key AUTOINCREMENT, " + //data[0]
                 "nama text null, " + //data[1]
-                "jenis text null, " + //data[2]
-                "jumlah text null, " + //data[3]
-                "noHp text null, " + //data[4]
-                "tglPesan text null, " + //data[5]
-                "tglSelesai text null, " + //data[6]
-                "tglAmbil text null, " + //data[7]
-                "keterangan text null, " + //data[8]
-                "harga text null, " + //data[9]
-                "total text null, " + //data[10]
-                "urlFoto text null, " + //data[11]
-                "status text null, " + //data[12]
-                "skor double null);"; //data[13]
+                "jenis integer null, " + //data[2]
+                "ukuran integer null, " + //data[3]
+                "jumlah integer null, " + //data[4]
+                "noHp text null, " + //data[5]
+                "tglPesan text null, " + //data[6]
+                "tglSelesai text null, " + //data[7]
+                "tglAmbil text null, " + //data[8]
+                "keterangan text null, " + //data[9]
+                "harga text null, " + //data[10]
+                "total text null, " + //data[11]
+                "urlFoto text null, " + //data[12]
+                "status integer null);"; //data[13]
         Log.d("Data", "onCreate: " + sql);
         // eksekusi query
         db.execSQL(sql);
+
+        // membuat table dengan nama "admins" untuk menyimpan data pin
+        String sqla = "create table secur (pins text not null default \"123456\");"; //data[13]
+        Log.d("Data", "onCreate: " + sqla);
+        // eksekusi query
+        db.execSQL(sqla);
+
+        // membuat table dengan nama "admins" untuk menyimpan data pin
+        String sqlb = "insert into secur (pins) values (\"123456\");"; //data[13]
+        Log.d("Data", "onCreate: " + sqlb);
+        // eksekusi query
+        db.execSQL(sqlb);
     }
 
     @Override
