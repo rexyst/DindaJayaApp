@@ -47,3 +47,15 @@ Bismillah InsyaAllah Skripsi
 >>update fitur daftar: berubah menjadi tampilan daftar pesanan yang sudah diambil <br />
 >>update fitur home: hanya menampilkan pesanan yang belum diambil <br />
 >>add fitur backup database to file [beta]
+
+>Versi 1.9
+>>update metode login <br />
+>>add AHP-TOPSIS method <br />
+>>add filter tanggal <br />
+>>add input ukuran pada pesanan baru <br />
+>>update struktur database <br />
+>>add fitur ubah pin (login)
+
+>Versi 1.10
+>>fix bug <br />
+>>remove fitur tutorial & backup <br />
