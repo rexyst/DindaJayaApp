@@ -177,13 +177,13 @@ double[][] waktuPesan;
         }
         tableLayout.addView(rowHeader);
 
-        // Mengambil database untuk dibaca
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        // Memulai transaksi dengan database
-        db.beginTransaction();
-
         // mencoba menjalankan query
         try {
+            // Mengambil database untuk dibaca
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            // Memulai transaksi dengan database
+            db.beginTransaction();
+
             // konversi tanggal
             String a = String.valueOf(tanggal.getText());
             // menyiapkan query
@@ -299,6 +299,9 @@ double[][] waktuPesan;
                 }
                 // mengubah status traksaksi dengan database
 //                db.setTransactionSuccessful();
+            } else {
+                db.endTransaction();
+                db.close();
             }
 
         }
@@ -308,13 +311,6 @@ double[][] waktuPesan;
             // tampilkan toast dengan pesan error
             Toast.makeText(getContext(), "Gagal terhubung ke database. Error: "+e, Toast.LENGTH_LONG).show();
         }
-//        finally
-//        {
-//            // Mengakhiri transaksi dengan database
-//            db.endTransaction();
-//            // dan menutup koneksi dengan database untuk menghemat resource yang digunakan
-//            db.close();
-//        }
     }
 
 
@@ -343,14 +339,14 @@ double[][] waktuPesan;
         }
         tableLayout.addView(rowHeader);
 
-        // Mengambil database untuk dibaca
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        // Memulai transaksi dengan database
-        db.beginTransaction();
-
         // mencoba menjalankan query
         try
         {
+            // Mengambil database untuk dibaca
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            // Memulai transaksi dengan database
+            db.beginTransaction();
+
             // konversi tanggal
             String a = date;
             // menyiapkan query
@@ -466,6 +462,9 @@ double[][] waktuPesan;
                 }
                 // mengubah status traksaksi dengan database
 //                db.setTransactionSuccessful();
+            } else {
+                db.endTransaction();
+                db.close();
             }
         }
         // jika gagal transaksi dengan database
@@ -474,13 +473,6 @@ double[][] waktuPesan;
             // tampilkan toast dengan pesan error
             Toast.makeText(getContext(), "Gagal terhubung ke database. Error: "+e, Toast.LENGTH_LONG).show();
         }
-//        finally
-//        {
-//            // Mengakhiri transaksi dengan database
-//            db.endTransaction();
-//            // dan menutup koneksi dengan database untuk menghemat resource yang digunakan
-//            db.close();
-//        }
     }
 
 

@@ -60,6 +60,7 @@ public class DaftarFragment extends Fragment {
     TableLayout tableLayout;
     String tgl, nowDate;
     TextView tanggal;
+    int count;
 
     private HomeViewModel homeViewModel;
 
@@ -149,6 +150,7 @@ public class DaftarFragment extends Fragment {
     }
 
     void getList(int z){
+        count = 0;
         // menyiapkan query
         String selectQuery;
         // konversi tanggal
@@ -254,7 +256,7 @@ public class DaftarFragment extends Fragment {
                             TableLayout.LayoutParams.WRAP_CONTENT));
                     // mengubah warna untuk baris berbeda
                     // untuk baris ganjil
-                    if (outlet_id %2 == 1) {
+                    if (count %2 == 1) {
                         row.setBackgroundColor(Color.parseColor("#9effd3"));
                     } else {
                         // untuk baris genap
@@ -278,13 +280,13 @@ public class DaftarFragment extends Fragment {
                             public void onClick(View v) {
                                 Toast.makeText(getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
                                 // beralih halaman detail pesanan
-                                startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
+                                startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", String.valueOf(outlet_id)));
                             }
                         });
                     }
                     // menambahkan baris yang telah disiapkan
                     tableLayout.addView(row);
-
+                    count++;
                 }
 
             }
