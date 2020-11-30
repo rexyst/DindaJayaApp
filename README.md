@@ -55,3 +55,7 @@ Bismillah InsyaAllah Skripsi
 >>add input ukuran pada pesanan baru <br />
 >>update struktur database <br />
 >>add fitur ubah pin (login)
+
+>Versi 1.10
+>>fix bug <br />
+>>remove fitur tutorial & backup <br />
