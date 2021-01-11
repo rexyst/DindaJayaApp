@@ -59,3 +59,7 @@ Bismillah InsyaAllah Skripsi
 >Versi 1.10
 >>fix bug <br />
 >>remove fitur tutorial & backup <br />
+
+>Versi 1.11
+>>fix bug <br />
+>>fix AHP-TOPSIS method <br />
