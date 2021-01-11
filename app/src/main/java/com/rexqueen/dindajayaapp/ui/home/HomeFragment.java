@@ -285,7 +285,7 @@ double[][] waktuPesan;
                                 public void onClick(View v) {
                                     Toast.makeText(getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
                                     // beralih halaman detail pesanan
-                                    startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
+                                    startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", String.valueOf(outlet_id)));
                                 }
                             });
                         }
@@ -448,7 +448,7 @@ double[][] waktuPesan;
                                 public void onClick(View v) {
                                     Toast.makeText(getContext(), String.valueOf(outlet_id), Toast.LENGTH_SHORT).show();
                                     // beralih halaman detail pesanan
-                                    startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", outlet_id));
+                                    startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", String.valueOf(outlet_id)));
                                 }
                             });
                         }
@@ -628,21 +628,15 @@ double[][] waktuPesan;
 
 //        input nilai waktu pesan / urutan pesan
     for (int i = 0; i < nData; i++) {
-//            konversi nilai jam ke 3,5,7,9
-//            urutan pertama pemesanan bernilai 9,
-//            urutan ke 2 bernilai 7,
-//            urutan ke 3 bernilai 5,
-//            urutan 4 dan seterusnya bernilai 3
+//            konversi nilai waktu pemesanan ke 3,5,7
 
         double x = data[i][0];
         if (i==0) {
-            pesanan[i][0] = 9;
-        } else if (i==1) {
-            pesanan[i][0] = 7;
-        } else if (i==2) {
             pesanan[i][0] = 5;
-        } else if (i>2) {
+        } else if (i==1) {
             pesanan[i][0] = 3;
+        } else if (i>1) {
+            pesanan[i][0] = 1;
         }
 
 //            input nilai jenis pesanan
@@ -650,13 +644,13 @@ double[][] waktuPesan;
         int y = (int)data[i][1];
         switch (y) {
             case 1:
-                pesanan[i][1] = 7;
-                break;
-            case 2:
                 pesanan[i][1] = 5;
                 break;
-            case 3:
+            case 2:
                 pesanan[i][1] = 3;
+                break;
+            case 3:
+                pesanan[i][1] = 1;
                 break;
             default:
                 break;
@@ -671,10 +665,10 @@ double[][] waktuPesan;
                 pesanan[i][2] = 3;
                 break;
             case 2:
-                pesanan[i][2] = 5;
+                pesanan[i][2] = 1;
                 break;
             case 3:
-                pesanan[i][2] = 3;
+                pesanan[i][2] = 1;
                 break;
             default:
                 break;
@@ -685,11 +679,11 @@ double[][] waktuPesan;
 //            konversi nilai jumlah ke 3,5,7
         int e = (int)data[i][3];
         if (e == 1) {
-            pesanan[i][3] = 5;
+            pesanan[i][3] = 1;
         } else if (e == 2) {
-            pesanan[i][3] = 5;
+            pesanan[i][3] = 1;
         } else if (e > 2) {
-            pesanan[i][3] = 3;
+            pesanan[i][3] = 1;
         }
     }
 
@@ -705,7 +699,7 @@ double[][] waktuPesan;
     }
     System.out.println("");
 
-    ahp(kriteria, 5, 7, 3, 3, nData, pesanan, waktuPesan, jenis, ukuran, jumlah);
+    ahp(kriteria, 5, 7, 1, 1, nData, pesanan, waktuPesan, jenis, ukuran, jumlah);
 }
 
     void ahp(double[][] kriteria, int k1, int k2, int k3, int k4, int nData, int[][] pesanan, double[][] waktuPesan, double[][] jenis, double[][] ukuran, double[][] jumlah) {
@@ -721,9 +715,9 @@ double[][] waktuPesan;
                 if (kriteria[i][j] == 0) {
                     if (crit[i] < crit[j]) {
                         kriteria[j][i] = crit[j];
-                        kriteria[i][j] = (double) 1 / crit[i];
+                        kriteria[i][j] = (double) 1 / crit[j];
                     } else if (crit[i] > crit[j]) {
-                        kriteria[i][j] = crit[j];
+                        kriteria[i][j] = crit[i];
                         kriteria[j][i] = (double) 1 / crit[i];
                     } else {
                         kriteria[j][i] = 1;
@@ -835,8 +829,8 @@ double[][] waktuPesan;
             for (int j = 0; j < nData; j++) {
                 if (waktuPesan[i][j] == 0) {
                     if (pesanan[i][0] < pesanan[j][0]) {
-                        waktuPesan[j][i] = pesanan[i][0];
-                        waktuPesan[i][j] = (double) 1 / pesanan[i][0];
+                        waktuPesan[j][i] = pesanan[j][0];
+                        waktuPesan[i][j] = (double) 1 / pesanan[j][0];
                     }  else if (pesanan[i][0] > pesanan[j][0]){
                         waktuPesan[i][j] = pesanan[i][0];
                         waktuPesan[j][i] = (double) 1 / pesanan[i][0];
@@ -880,8 +874,8 @@ double[][] waktuPesan;
             for (int j = 0; j < nData; j++) {
                 if (jenis[i][j] == 0.0) {
                     if (pesanan[i][1] < pesanan[j][1]) {
-                        jenis[j][i] = pesanan[i][1];
-                        jenis[i][j] = (double) 1 / pesanan[i][1];
+                        jenis[j][i] = pesanan[j][1];
+                        jenis[i][j] = (double) 1 / pesanan[j][1];
                     } else if (pesanan[i][1] > pesanan[j][1]) {
                         jenis[i][j] = pesanan[i][1];
                         jenis[j][i] = (double) 1 / pesanan[i][1];
@@ -925,8 +919,8 @@ double[][] waktuPesan;
             for (int j = 0; j < nData; j++) {
                 if (ukuran[i][j] == 0.0) {
                     if (pesanan[i][2] < pesanan[j][2]) {
-                        ukuran[j][i] = pesanan[i][2];
-                        ukuran[i][j] = (double) 1 / pesanan[i][2];
+                        ukuran[j][i] = pesanan[j][2];
+                        ukuran[i][j] = (double) 1 / pesanan[j][2];
                     } else if (pesanan[i][2] > pesanan[j][2]) {
                         ukuran[i][j] = pesanan[i][2];
                         ukuran[j][i] = (double) 1 / pesanan[i][2];
@@ -969,8 +963,8 @@ double[][] waktuPesan;
             for (int j = 0; j < nData; j++) {
                 if (jumlah[i][j] == 0.0) {
                     if (pesanan[i][3] < pesanan[j][3]) {
-                        jumlah[j][i] = pesanan[i][3];
-                        jumlah[i][j] = (double) 1 / pesanan[i][3];
+                        jumlah[j][i] = pesanan[j][3];
+                        jumlah[i][j] = (double) 1 / pesanan[j][3];
                     } else if (pesanan[i][3] > pesanan[j][3]) {
                         jumlah[i][j] = pesanan[i][3];
                         jumlah[j][i] = (double) 1 / pesanan[i][3];
@@ -1415,9 +1409,13 @@ double[][] waktuPesan;
 
                     @Override
                     public void onClick(View v) {
+                        String iD = String.valueOf(sData[ii][0]);
                         Toast.makeText(getContext(), String.valueOf(sData[ii][0]), Toast.LENGTH_SHORT).show();
+                        try {
                         // beralih halaman detail pesanan
-                        startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", sData[ii][0]));
+                        startActivity(new Intent(getContext(), DetailPesanan.class).putExtra("idOrder", iD));
+
+                        } catch (Exception e){}
                     }
                 });
             }

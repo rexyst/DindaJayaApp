@@ -27,11 +27,9 @@ import java.util.ArrayList;
 public class Login extends AppCompatActivity {
 
     // insiasi variabel
-    Button key1,key2,key3,key4,key5,key6,key7,key8,key9,key0,keyErase,keyOk;
+    Button keyOk;
     Intent intent;
     EditText pin;
-//    ArrayList<String> pins = new ArrayList<String>();
-    Integer count;
     String key, pins="";
     DBHelper dbHelper;
 
