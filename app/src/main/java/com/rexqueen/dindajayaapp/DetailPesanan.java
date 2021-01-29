@@ -52,6 +52,7 @@ public class DetailPesanan extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // inisiasi variabel
         // inisiasi class DBHelper
         dbHelper = new DBHelper(DetailPesanan.this);
 
@@ -123,6 +124,7 @@ public class DetailPesanan extends AppCompatActivity {
                         data[i] = cursor.getString(i);
                     }
 
+//                    konversi nilai
                     // konversi nilai status
                     if (data[13].equals("1")) {
                         data[13] = "Menunggu";

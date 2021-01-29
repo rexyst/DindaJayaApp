@@ -3,15 +3,7 @@ package com.rexqueen.dindajayaapp.model;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.util.Log;
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
 
 public class DBHelper extends SQLiteOpenHelper {
     // menyiapkan nama database yang akan dipakai

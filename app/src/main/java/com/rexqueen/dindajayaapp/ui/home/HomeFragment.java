@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,9 +35,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
-
-import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment {
 
@@ -209,6 +205,7 @@ double[][] waktuPesan;
                         // mengambil nilai dari kolom "status"
                         String outlet_status = cursor.getString(cursor.getColumnIndex("status"));
 
+//                        konversi nilai
                         // konversi nilai dari jenis
                         // jika nilai 1
                         if (outlet_jenis.equals("1")) {
@@ -261,12 +258,6 @@ double[][] waktuPesan;
                             // untuk baris genap
                             row.setBackgroundColor(Color.parseColor("#69d1a2"));
                         }
-//                    if (outlet_id %2 == 1) {
-//                        row.setBackgroundColor(Color.parseColor("#9effd3"));
-//                    } else {
-//                        // untuk baris genap
-//                        row.setBackgroundColor(Color.parseColor("#69d1a2"));
-//                    }
                         // menyiapkan data pada tiap kolom
                         String[] colText = {outlet_id + "", outlet_name, outlet_jenis, outlet_status};
                         // memulai iterasi untuk menambahkan kolom
@@ -297,8 +288,6 @@ double[][] waktuPesan;
                     db.endTransaction();
                     db.close();
                 }
-                // mengubah status traksaksi dengan database
-//                db.setTransactionSuccessful();
             } else {
                 db.endTransaction();
                 db.close();
@@ -424,12 +413,6 @@ double[][] waktuPesan;
                             // untuk baris genap
                             row.setBackgroundColor(Color.parseColor("#69d1a2"));
                         }
-//                    if (outlet_id %2 == 1) {
-//                        row.setBackgroundColor(Color.parseColor("#9effd3"));
-//                    } else {
-//                        // untuk baris genap
-//                        row.setBackgroundColor(Color.parseColor("#69d1a2"));
-//                    }
                         // menyiapkan data pada tiap kolom
                         String[] colText = {outlet_id + "", outlet_name, outlet_jenis, outlet_status};
                         // memulai iterasi untuk menambahkan kolom
@@ -460,8 +443,6 @@ double[][] waktuPesan;
                     db.endTransaction();
                     db.close();
                 }
-                // mengubah status traksaksi dengan database
-//                db.setTransactionSuccessful();
             } else {
                 db.endTransaction();
                 db.close();
@@ -815,7 +796,6 @@ double[][] waktuPesan;
         double[][] normJumlah = new double[nData + 1][nData];
         double[][] eigen = new double[4][nData];
         double[][] weightAlt = new double[nData][4];
-        double[] ahp = new double[nData];
         double[] pis = new double[4], nis = new double[4];
         double[] x1 = new double[nData], x2 = new double[nData], x3 = new double[nData], x4 = new double[nData];
         double[] d1 = new double[nData], d2 = new double[nData], rc = new double[nData];

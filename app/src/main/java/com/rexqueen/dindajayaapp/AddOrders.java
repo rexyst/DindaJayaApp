@@ -88,7 +88,9 @@ public class AddOrders extends AppCompatActivity {
                 int hrg = Integer.parseInt(harga.getText().toString());
                 // kalikan jumlah dengan harga yang diinputkan
                 // lalu tampilkan ke textview total
+                try {
                 total.setText(String.valueOf(jum*hrg));
+                } catch (Exception e){}
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
