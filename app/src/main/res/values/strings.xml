@@ -9,6 +9,7 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_backup">Ekspor Data</string>
     <string name="menu_tentang">Tentang</string>
+    <string name="menu_setCrit">Ubah Prioritas</string>
     <string name="menu_tutorial">Tutorial</string>
     <string name="app_info">Aplikasi ini dibuat untuk membantu mempermudah pengelolaan pesanan di Dinda Jaya Tailor.</string>
     <string name="deve_info">dibuat oleh:</string>

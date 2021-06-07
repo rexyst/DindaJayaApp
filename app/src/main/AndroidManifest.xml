@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChPin"></activity>
+        <activity android:name=".settingKriteria"></activity>
+        <activity android:name=".ChPin" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

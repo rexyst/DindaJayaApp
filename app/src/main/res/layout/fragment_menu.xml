@@ -34,6 +34,15 @@
             android:textAlignment="textStart"
             android:paddingLeft="20dp"></Button>
 
+        <Button
+            android:id="@+id/setCrit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_setCrit"
+            android:background="@color/colorAccent"
+            android:textAlignment="textStart"
+            android:paddingLeft="20dp"></Button>
+
 <!--        <Button-->
 <!--            android:id="@+id/backup"-->
 <!--            android:layout_width="match_parent"-->

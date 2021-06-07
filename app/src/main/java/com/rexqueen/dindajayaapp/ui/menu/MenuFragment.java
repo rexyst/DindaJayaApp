@@ -19,16 +19,18 @@ import com.rexqueen.dindajayaapp.Home;
 import com.rexqueen.dindajayaapp.Login;
 import com.rexqueen.dindajayaapp.R;
 import com.rexqueen.dindajayaapp.model.DBHelper;
+import com.rexqueen.dindajayaapp.settingKriteria;
 
 public class MenuFragment extends Fragment {
 
     // inisiasi variabel
-    Button tentang, logout;
+    Button tentang, setCrit, logout;
 //    Button backup;
     Intent intent;
     Login login;
     Home home;
     About about;
+    settingKriteria settingKriteria;
     DBHelper dbHelper;
 
     // inisiasi Class MenuViewModel
@@ -45,11 +47,13 @@ public class MenuFragment extends Fragment {
         login = new Login();
         home = new Home();
         about = new About();
+        settingKriteria = new settingKriteria();
         dbHelper = new DBHelper(this.getContext());
 
         // mendapatkan nilai dari tombol
         tentang = root.findViewById(R.id.about);
         logout = root.findViewById(R.id.logout);
+        setCrit = root.findViewById(R.id.setCrit);
 //        backup = root.findViewById(R.id.backup);
 
         // menambahkan listener pada tombol tentang
@@ -60,6 +64,16 @@ public class MenuFragment extends Fragment {
                 intent = new Intent(root.getContext(), about.getClass());
                 startActivity(intent);
                 // menutup activity Home
+                home.finish();
+            }
+        });
+
+        setCrit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(root.getContext(), settingKriteria.getClass());
+                startActivity(intent);
+
                 home.finish();
             }
         });

@@ -33,7 +33,8 @@ import java.util.Locale;
 public class DetailPesanan extends AppCompatActivity {
 
     // inisiasi variabel
-    TextView id, nama, jenis, ukuran, jumlah, hp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, total, status;
+    TextView id, laki, perempuan, seragam, atasan, bawahan, nama, anak, dewasa, xtra, sbadan, terusan, lpanjang, lpendek,
+            cpanjang, cpendek, rpanjang, rpendek, jumlah, hp, tglPesan, tglSelesai, tglAmbil, keterangan, harga, status;
     Button selesai, ambil, diproses, ambilFoto;
     ImageView foto;
     DBHelper dbHelper;
@@ -57,22 +58,37 @@ public class DetailPesanan extends AppCompatActivity {
         dbHelper = new DBHelper(DetailPesanan.this);
 
         //inisiasi array untuk menyimpan data dari database
-        data = new String[14];
+        data = new String[28];
 
         // mengambil nilai dari textview
         id = findViewById(R.id.idPesan);
-        nama = findViewById(R.id.nama);
-        jenis = findViewById(R.id.jenis);
-        ukuran = findViewById(R.id.ukuran);
-        jumlah = findViewById(R.id.jumlah);
-        hp = findViewById(R.id.hp);
-        tglPesan = findViewById(R.id.tglPesan);
-        tglSelesai = findViewById(R.id.tglSelesai);
-        tglAmbil = findViewById(R.id.tglDiambil);
-        keterangan = findViewById(R.id.keterangan);
-        harga = findViewById(R.id.harga);
-        total = findViewById(R.id.total);
-        status = findViewById(R.id.status);
+        laki = findViewById(R.id.slaki);
+        perempuan = findViewById(R.id.sperempuan);
+        seragam = findViewById(R.id.sseragam);
+        atasan = findViewById(R.id.satasan);
+        bawahan = findViewById(R.id.sbawahan);
+        nama = findViewById(R.id.snama);
+        anak = findViewById(R.id.sanak);
+        dewasa = findViewById(R.id.sdewasa);
+        xtra = findViewById(R.id.sxtra);
+        sbadan = findViewById(R.id.ssbadan);
+        terusan = findViewById(R.id.sterusan);
+        lpanjang = findViewById(R.id.slpanjang);
+        lpendek = findViewById(R.id.slpendek);
+        cpanjang = findViewById(R.id.scpanjang);
+        cpendek = findViewById(R.id.scpendek);
+        rpanjang = findViewById(R.id.srpanjang);
+        rpendek = findViewById(R.id.srpendek);
+        jumlah = findViewById(R.id.sjumlah);
+        hp = findViewById(R.id.shp);
+        tglPesan = findViewById(R.id.stglPesan);
+        tglSelesai = findViewById(R.id.stglSelesai);
+        tglAmbil = findViewById(R.id.stglDiambil);
+        keterangan = findViewById(R.id.sketerangan);
+        harga = findViewById(R.id.sbiaya);
+        status = findViewById(R.id.sstatus);
+
+        keterangan.setEnabled(false);
 
         // mengambil nilai dari button
         selesai = findViewById(R.id.selesai_bt);
@@ -120,23 +136,24 @@ public class DetailPesanan extends AppCompatActivity {
                     // mengambil nilai perkolom
                     data_id = cursor.getInt(cursor.getColumnIndex("idPesan"));
                     data[0] = String.valueOf(data_id);
-                    for (int i = 1; i < 14; i++) {
+                    for (int i = 1; i < 27; i++) {
                         data[i] = cursor.getString(i);
+                        System.out.println("data "+i+" : "+data[i]);
                     }
 
 //                    konversi nilai
                     // konversi nilai status
-                    if (data[13].equals("1")) {
-                        data[13] = "Menunggu";
+                    if (data[10].equals("1")) {
+                        data[10] = "Menunggu";
                     } else
-                    if (data[13].equals("2")) {
-                        data[13] = "Diproses";
+                    if (data[10].equals("2")) {
+                        data[10] = "Diproses";
                     } else
-                    if (data[13].equals("3")) {
-                        data[13] = "Selesai";
+                    if (data[10].equals("3")) {
+                        data[10] = "Selesai";
                     } else
-                    if (data[13].equals("4")) {
-                        data[13] = "Diambil";
+                    if (data[10].equals("4")) {
+                        data[10] = "Diambil";
                     }
 
                     // konversi nilai jenis
@@ -161,38 +178,81 @@ public class DetailPesanan extends AppCompatActivity {
                         data[3] = "Extra";
                     }
 
+//                    "idPesan integer primary key AUTOINCREMENT, " + //data[0]
+//                            "nama text null, " + //data[1]
+//                            "noHp text null, " + //data[2]
+//                            "tglPesan text null, " + //data[3]
+//                            "blnPesan text null,"+ //data[4]
+//                            "tglSelesai text null, " + //data[5]
+//                            "tglAmbil text null, " + //data[6]
+//                            "keterangan text null, " + //data[7]
+//                            "biaya text null, " + //data[8]
+//                            "urlFoto text null, " + //data[9]
+//                            "status integer null, "+ //data[10]
+//
+//                            "laki integer null, " + //data[11]
+//                            "perempuan integer null, " + //data[12]
+//                            "seragam integer null, " + //data[13]
+//                            "atasan integer null, " + //data[14]
+//                            "bawahan integer null, " + //data[15]
+//                            "sbadan integer null, " + //data[16]
+//                            "terusan integer null, " + //data[17]
+//                            "lpanjang integer null, " + //data[18]
+//                            "lpendek integer null, " + //data[19]
+//                            "cpanjang integer null, " + //data[20]
+//                            "cpendek integer null, " + //data[21]
+//                            "rpanjang integer null, " + //data[22]
+//                            "rpendek integer null, " + //data[23]
+//                            "anak integer null, " + //data[24]
+//                            "dewasa integer null, " + //data[25]
+//                            "xtra integer null, " + //data[26]
+//                            "jumlah integer null);"; //data[27]
+
                     // menampilkan data dari array ke textview
                     id.setText(data[0]);
+                    laki.setText(data[11]);
+                    perempuan.setText(data[12]);
+                    seragam.setText(data[13]);
+                    atasan.setText(data[14]);
+                    bawahan.setText(data[15]);
                     nama.setText(data[1]);
-                    jenis.setText(data[2]);
-                    ukuran.setText(data[3]);
-                    jumlah.setText(data[4]);
-                    hp.setText(data[5]);
-                    tglPesan.setText(data[6]);
-                    tglSelesai.setText(data[7]);
-                    tglAmbil.setText(data[8]);
-                    keterangan.setText(data[9]);
-                    harga.setText(data[10]);
-                    total.setText(data[11]);
-                    status.setText(data[13]);
+                    anak.setText(data[24]);
+                    dewasa.setText(data[25]);
+                    xtra.setText(data[26]);
+                    sbadan.setText(data[16]);
+                    terusan.setText(data[17]);
+                    lpanjang.setText(data[18]);
+                    lpendek.setText(data[19]);
+                    cpanjang.setText(data[20]);
+                    cpendek.setText(data[21]);
+                    rpanjang.setText(data[22]);
+                    rpendek.setText(data[23]);
+                    jumlah.setText(data[27]);
+                    hp.setText(data[2]);
+                    tglPesan.setText(data[3]);
+                    tglSelesai.setText(data[5]);
+                    tglAmbil.setText(data[6]);
+                    keterangan.setText(data[7]);
+                    harga.setText(data[8]);
+                    status.setText(data[10]);
 
                     // cek status untuk menampilkan tombol yang sesuai
                     // status menunggu
-                    if (data[13].equals("Menunggu")) {
+                    if (data[10].equals("Menunggu")) {
                         diproses.setVisibility(View.VISIBLE);
                         selesai.setVisibility(View.GONE);
                         ambilFoto.setVisibility(View.GONE);
                         ambil.setVisibility(View.GONE);
                     } else
                         // status diproses
-                        if (data[13].equals("Diproses")) {
+                        if (data[10].equals("Diproses")) {
                             diproses.setVisibility(View.GONE);
                             selesai.setVisibility(View.VISIBLE);
                             ambilFoto.setVisibility(View.GONE);
                             ambil.setVisibility(View.GONE);
                         } else
                             // status selesai
-                            if (data[13].equals("Selesai")) {
+                            if (data[10].equals("Selesai")) {
                                 diproses.setVisibility(View.GONE);
                                 selesai.setVisibility(View.GONE);
                                 ambilFoto.setVisibility(View.VISIBLE);
@@ -267,8 +327,8 @@ public class DetailPesanan extends AppCompatActivity {
                     });
 
                     // cek foto
-                    if (data[12].length() > 1) {
-                        currentPhotoPath = data[12];
+                    if (data[9].length() > 1) {
+                        currentPhotoPath = data[9];
                         setPic();
                     } else {
                         foto.setImageResource(R.drawable.default_img);

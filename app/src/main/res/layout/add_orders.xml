@@ -20,6 +20,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp">
 
+<!--            NAMA    -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,6 +38,117 @@
                 android:layout_marginBottom="15dp"
                 android:inputType="text"/>
 
+
+<!--            Jenis Kelamin   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/laki"
+                    android:text="Laki-laki"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/jka">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementl"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <EditText
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahl"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementl"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/perempuan"
+                    android:text="Perempuan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/jkb">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementp"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <EditText
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahp"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementp"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+<!--            Jenis Pakaian   -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,97 +157,164 @@
                 android:typeface="monospace"
                 android:textStyle="bold"/>
 
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="15dp">
-                <RadioButton
+
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seragam"
                     android:id="@+id/seragam"
+                    android:text="Seragam"
+                    android:textSize="16sp"
                     android:typeface="monospace"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClicked"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Atasan"
-                    android:id="@+id/atasan"
-                    android:typeface="monospace"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClicked"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bawahan"
-                    android:id="@+id/bawahan"
-                    android:typeface="monospace"
-                    android:onClick="onRadioButtonClicked"/>
-            </RadioGroup>
+                    android:layout_marginRight="10dp"/>
+<!--                    android:onClick="jenisClick"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ukuran"
-                android:textSize="16sp"
-                android:typeface="monospace"
-                android:textStyle="bold"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/jnsa">
 
-            <RadioGroup
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementja"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahja"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementja"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="15dp">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Anak-anak"
-                    android:id="@+id/anak"
-                    android:typeface="monospace"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClickedd"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dewasa"
-                    android:id="@+id/dewasa"
-                    android:typeface="monospace"
-                    android:layout_marginRight="10dp"
-                    android:onClick="onRadioButtonClickedd"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Extra"
-                    android:id="@+id/extra"
-                    android:typeface="monospace"
-                    android:onClick="onRadioButtonClickedd"/>
-            </RadioGroup>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Harga Satuan (Rp.)"
-                android:textSize="16sp"
-                android:typeface="monospace"
-                android:textStyle="bold"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/atasan"
+                    android:text="Atasan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+<!--                    android:onClick="jenisClick"/>-->
 
-            <EditText
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/jnsb">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementjb"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahjb"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementjb"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Harga Satuan"
-                android:id="@+id/harga"
-                android:textSize="16sp"
-                android:typeface="monospace"
-                android:layout_marginBottom="15dp"
-                android:inputType="number"
-                android:maxLength="13"/>
+                android:layout_marginBottom="15dp">
 
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bawahan"
+                    android:text="Bawahan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+<!--                    android:onClick="jenisClick"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/jnsc">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementjc"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahjc"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementjc"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+<!--            Model Pakaian   -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jumlah"
+                android:text="Model"
                 android:textSize="16sp"
                 android:typeface="monospace"
                 android:textStyle="bold"/>
@@ -143,35 +322,619 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
-                <Button
-                    android:layout_width="48dp"
-                    android:onClick="decrement"
-                    android:text="-"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/colorAccent"
-                    android:layout_height="48dp" />
-                <TextView
-                    android:textColor="#212121"
-                    android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml0">
+
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:id="@+id/sbadan"
+                    android:text="Setengah Badan"
+                    android:textSize="16sp"
                     android:typeface="monospace"
-                    android:paddingRight="8dp"
-                    android:paddingLeft="8dp"
-                    android:id="@+id/jumlah"
-                    android:textSize="25dp"/>
-                <Button
-                    android:layout_width="48dp"
-                    android:onClick="increment"
-                    android:text="+"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/colorAccent"
-                    android:layout_height="48dp" />
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m0">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementa"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlaha"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementa"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml1">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/terusan"
+                    android:text="Terusan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m1">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementb"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahb"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementb"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml2">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lpanjang"
+                    android:text="Lengan Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m2">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementc"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahc"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementc"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml3">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lpendek"
+                    android:text="Lengan Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m3">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementd"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahd"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementd"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml4">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cpanjang"
+                    android:text="Celana Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m4">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decremente"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahe"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incremente"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml5">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cpendek"
+                    android:text="Celana Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m5">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementf"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahf"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementf"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml6">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rpanjang"
+                    android:text="Rok Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m6">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementg"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahg"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementg"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ml7">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rpendek"
+                    android:text="Rok Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/m7">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementh"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahh"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementh"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+<!--            Ukuran Pakaian  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukuran"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/anak"
+                    android:text="Anak-anak"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/ua">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementua"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahua"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementua"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dewasa"
+                    android:text="Dewasa"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/ub">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementub"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahub"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementub"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/extra"
+                    android:text="Extra"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:id="@+id/uc">
+
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="decrementuc"
+                        android:text="-"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/jumlahuc"
+                        android:textSize="25dp"/>
+                    <Button
+                        android:layout_width="48dp"
+                        android:onClick="incrementuc"
+                        android:text="+"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
+                        android:layout_height="48dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--            Jumlah Pesanan  -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah Pesanan : "
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/jumlah"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Biaya (Rp.)"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total Biaya"
+                android:id="@+id/biaya"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:inputType="number"
+                android:maxLength="13"/>
+
+
+<!--            Tanggal Pesan   -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,7 +954,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tanggal"
                     android:layout_marginRight="15dp"
-                    android:text="Pilih tanggal dengan tombol"
+                    android:hint="Pilih tanggal dengan tombol"
                     android:typeface="monospace"
                     android:textSize="16sp"/>
 
@@ -242,25 +1005,7 @@
                 android:textSize="16sp"
                 android:typeface="monospace"
                 android:layout_marginBottom="15dp"
-                android:inputType="text"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total (Rp.)"
-                android:textSize="16sp"
-                android:typeface="monospace"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Total"
-                android:id="@+id/total"
-                android:textSize="20sp"
-                android:typeface="monospace"
-                android:layout_marginBottom="15dp"
-                android:inputType="text"/>
+                android:inputType="text|textMultiLine"/>
 
             <Button
                 android:layout_width="match_parent"

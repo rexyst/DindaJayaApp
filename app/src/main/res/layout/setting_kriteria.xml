@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settingKriteria"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pengaturan Kriteria"
+                android:typeface="monospace"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Waktu Pesan [C0] :"
+                android:typeface="monospace"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c0">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c01"
+                    android:onClick="c0click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c02"
+                    android:onClick="c0click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c03"
+                    android:onClick="c0click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c04"
+                    android:onClick="c0click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c05"
+                    android:onClick="c0click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. Jenis Kelamin [C1] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c1">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c11"
+                    android:onClick="c1click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c12"
+                    android:onClick="c1click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c13"
+                    android:onClick="c1click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c14"
+                    android:onClick="c1click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c15"
+                    android:onClick="c1click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Jenis Pakaian [C2] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c2">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c21"
+                    android:onClick="c2click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c22"
+                    android:onClick="c2click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c23"
+                    android:onClick="c2click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c24"
+                    android:onClick="c2click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c25"
+                    android:onClick="c2click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. Model Pakaian [C3] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c3">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c31"
+                    android:onClick="c3click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c32"
+                    android:onClick="c3click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c33"
+                    android:onClick="c3click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c34"
+                    android:onClick="c3click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c35"
+                    android:onClick="c3click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5. Ukuran [C4] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c4">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c41"
+                    android:onClick="c4click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c42"
+                    android:onClick="c4click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c43"
+                    android:onClick="c4click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c44"
+                    android:onClick="c4click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c45"
+                    android:onClick="c4click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6. Jumlah Pesanan [C5] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c5">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c51"
+                    android:onClick="c5click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c52"
+                    android:onClick="c5click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c53"
+                    android:onClick="c5click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c54"
+                    android:onClick="c5click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c55"
+                    android:onClick="c5click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7. Status Pesanan [C6] :"
+                android:typeface="monospace"
+                android:layout_marginTop="20dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/c6"
+                android:layout_marginBottom="20dp">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak Penting"
+                    android:id="@+id/c61"
+                    android:onClick="c6click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kurang Penting"
+                    android:id="@+id/c62"
+                    android:onClick="c6click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penting"
+                    android:id="@+id/c63"
+                    android:onClick="c6click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sangat Penting"
+                    android:id="@+id/c64"
+                    android:onClick="c6click"
+                    android:typeface="monospace"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mutlak Penting"
+                    android:id="@+id/c65"
+                    android:onClick="c6click"
+                    android:typeface="monospace"/>
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveCrit"
+                android:text="Simpan"
+                android:typeface="monospace"
+                android:textSize="16sp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/batalCrit"
+                android:text="Batal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:typeface="monospace"
+                android:textSize="16sp"
+                android:background="#d4423d"
+                android:textColor="@color/colorAccent"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

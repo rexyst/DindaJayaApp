@@ -50,75 +50,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nama"
-                android:id="@+id/nama"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jenis"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jenis"
-                android:id="@+id/jenis"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ukuran"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ukuran"
-                android:id="@+id/ukuran"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jumlah"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jumlah"
-                android:id="@+id/jumlah"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nomor HP"
+                android:text="Status"
                 android:typeface="monospace"
                 android:textSize="16sp"/>
 
@@ -126,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nomor"
-                android:id="@+id/hp"
+                android:id="@+id/sstatus"
                 android:typeface="monospace"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -134,122 +66,731 @@
 
             <TextView
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:typeface="monospace"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:id="@+id/snama"
+                android:typeface="monospace"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"/>
+
+            <!--            Jenis Kelamin   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Laki-laki"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/slaki"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perempuan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sperempuan"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--            Jenis Pakaian   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seragam"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+                <!--                    android:onClick="jenisClick"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sseragam"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atasan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+                <!--                    android:onClick="jenisClick"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/satasan"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bawahan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+                <!--                    android:onClick="jenisClick"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sbawahan"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--            Model Pakaian   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Setengah Badan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/ssbadan"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terusan"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sterusan"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lengan Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/slpanjang"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lengan Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/slpendek"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Celana Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/scpanjang"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Celana Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/scpendek"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rok Panjang"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/srpanjang"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rok Pendek"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/srpendek"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!--            Ukuran Pakaian  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukuran"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anak-anak"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sanak"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dewasa"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sdewasa"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extra"
+                    android:textSize="16sp"
+                    android:typeface="monospace"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <TextView
+                        android:textColor="#212121"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:typeface="monospace"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:id="@+id/sxtra"
+                        android:textSize="25dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--            Jumlah Pesanan  -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah Pesanan : "
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sjumlah"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:typeface="monospace"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Biaya (Rp.)"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sbiaya"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:layout_marginBottom="15dp"
+                android:maxLength="13"/>
+
+
+            <!--            Tanggal Pesan   -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Pesan"
+                android:textSize="16sp"
                 android:typeface="monospace"
-                android:textSize="16sp"/>
+                android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stglPesan"
+                    android:layout_marginRight="15dp"
+                    android:typeface="monospace"
+                    android:textSize="16sp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tanggal"
-                android:id="@+id/tglPesan"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Selesai"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/stglSelesai"
+                android:layout_marginRight="15dp"
                 android:typeface="monospace"
                 android:textSize="16sp"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tanggal"
-                android:id="@+id/tglSelesai"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tanggal Diambil"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/stglDiambil"
+                android:layout_marginRight="15dp"
                 android:typeface="monospace"
                 android:textSize="16sp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No. HP"
+                android:textSize="16sp"
+                android:typeface="monospace"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tanggal"
-                android:id="@+id/tglDiambil"
+                android:id="@+id/shp"
+                android:textSize="16sp"
                 android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
                 android:layout_marginBottom="15dp"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Keterangan"
+                android:textSize="16sp"
                 android:typeface="monospace"
-                android:textSize="16sp"/>
+                android:textStyle="bold"/>
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keterangan"
-                android:id="@+id/keterangan"
+                android:id="@+id/sketerangan"
+                android:textSize="16sp"
                 android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Harga Satuan (Rp.)"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Harga Satuan"
-                android:id="@+id/harga"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total (Rp.)"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:id="@+id/total"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status"
-                android:typeface="monospace"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status"
-                android:id="@+id/status"
-                android:typeface="monospace"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"
+                android:inputType="text|textMultiLine"/>
 
             <Button
                 android:layout_width="match_parent"

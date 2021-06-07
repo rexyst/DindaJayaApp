@@ -3,6 +3,7 @@ package com.rexqueen.dindajayaapp.ui.home;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -48,11 +49,18 @@ public class HomeFragment extends Fragment {
     TableLayout tableLayout;
     String tgl, nowDate;
 
+//    kriteria
+    int [] criterias;
+
 //    AHPTOPSIS
-double[][] waktuPesan;
-    double[][] jenis;
+    double[][] waktuPesan;
+    double[][] jenisk;
+    double[][] jenisp;
+    double[][] model;
     double[][] ukuran;
     double[][] jumlah;
+    double[][] status;
+
     double[][] kriteria;
     double[][] data;
     String[][] sData;
@@ -74,6 +82,8 @@ double[][] waktuPesan;
         // membuat variabel root untuk mengakses view
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        criterias = new int [7];
+
         // inisiasi class DBHelper
         dbHelper = new DBHelper(root.getContext());
         // inisiasi variabel col untuk menyimpan textview sebanyak 6
@@ -85,13 +95,13 @@ double[][] waktuPesan;
         home = new Home();
 
         // membuat format tanggal
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("MM-yyyy", Locale.US);
 
 //        inisiasi variabel tanggal
         tanggal = root.findViewById(R.id.dates);
 
 //        mengisi nilai tanggal
-        nowDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        nowDate = new SimpleDateFormat("MM-yyyy", Locale.getDefault()).format(new Date());
         tanggal.setText(nowDate);
 
         // insiasi tombol melayang (+)
@@ -138,6 +148,8 @@ double[][] waktuPesan;
 
                 },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
+                ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+
                 // menampilkan dialog pemilihan tanggal
                 datePickerDialog.show();
             }
@@ -148,7 +160,29 @@ double[][] waktuPesan;
         return root;
     }
 
+    void getCriteria(){
+        try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            db.beginTransaction();
+
+            String query = "select * from criterias;";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.getCount()>0){
+                int count = 0;
+                while (cursor.moveToNext()) {
+                    criterias [count] = Integer.parseInt(cursor.getString(cursor.getColumnIndex("criteriaValue")));
+                    count++;
+                }
+            }
+            db.endTransaction();
+
+        }catch (Exception e) {}
+    }
+
     void getList(){
+        // mengambil nilai krieria
+        getCriteria();
         // mebuat header pada TableLayout
         // mendapatkan nilai TableRow dari TableLayout
         TableRow rowHeader = new TableRow(getContext());
@@ -183,7 +217,7 @@ double[][] waktuPesan;
             // konversi tanggal
             String a = String.valueOf(tanggal.getText());
             // menyiapkan query
-            String selectQuery = "SELECT * FROM orders where `status`!=4 and `tglPesan`='" + a + "'";
+            String selectQuery = "SELECT * FROM orders where `status`!=4 and `blnPesan`='" + a + "'";
             // menyiapkan cursor untuk membaca nilai
             Cursor cursor = db.rawQuery(selectQuery, null);
             // jika jumlah baris lebih dari 0
@@ -200,8 +234,22 @@ double[][] waktuPesan;
                         final int outlet_id = cursor.getInt(cursor.getColumnIndex("idPesan"));
                         // mengambil nilai dari kolom "nama"
                         final String outlet_name = cursor.getString(cursor.getColumnIndex("nama"));
-                        // mengambil nilai dari kolom "jenis"
-                        String outlet_jenis = cursor.getString(cursor.getColumnIndex("jenis"));
+                        // mengambil nilai dari "jenis"
+                        String outlet_jenis = "x";
+                        int [] jeniss = new int [3];
+                        jeniss[0] = cursor.getInt(cursor.getColumnIndex("seragam"));
+                        jeniss[1] = cursor.getInt(cursor.getColumnIndex("atasan"));
+                        jeniss[2] = cursor.getInt(cursor.getColumnIndex("bawahan"));
+                        if (jeniss[0] > 0) {
+                            outlet_jenis = "1";
+                        } else if (jeniss[1] > 0) {
+                            outlet_jenis = "2";
+                        } else if (jeniss[2] > 0) {
+                            outlet_jenis = "3";
+                        } else {
+                            Toast.makeText(getContext(), "jenis tidak ditemukan", Toast.LENGTH_SHORT).show();
+                        }
+
                         // mengambil nilai dari kolom "status"
                         String outlet_status = cursor.getString(cursor.getColumnIndex("status"));
 
@@ -302,8 +350,9 @@ double[][] waktuPesan;
         }
     }
 
-
     void getList(String date){
+        // mengambil nilai kriteria
+        getCriteria();
         // mebuat header pada TableLayout
         // mendapatkan nilai TableRow dari TableLayout
         TableRow rowHeader = new TableRow(getContext());
@@ -339,7 +388,7 @@ double[][] waktuPesan;
             // konversi tanggal
             String a = date;
             // menyiapkan query
-            String selectQuery = "SELECT * FROM orders where `status`!=4 and `tglPesan`='"+a+"'";
+            String selectQuery = "SELECT * FROM orders where `status`!=4 and `blnPesan`='"+a+"'";
             // menyiapkan cursor untuk membaca nilai
             Cursor cursor = db.rawQuery(selectQuery,null);
             // jika jumlah baris lebih dari 0
@@ -357,7 +406,21 @@ double[][] waktuPesan;
                         // mengambil nilai dari kolom "nama"
                         final String outlet_name = cursor.getString(cursor.getColumnIndex("nama"));
                         // mengambil nilai dari kolom "jenis"
-                        String outlet_jenis = cursor.getString(cursor.getColumnIndex("jenis"));
+                        String outlet_jenis = "x";
+                        int [] jeniss = new int [3];
+                        jeniss[0] = cursor.getInt(cursor.getColumnIndex("seragam"));
+                        jeniss[1] = cursor.getInt(cursor.getColumnIndex("atasan"));
+                        jeniss[2] = cursor.getInt(cursor.getColumnIndex("bawahan"));
+                        if (jeniss[0] > 0) {
+                            outlet_jenis = "1";
+                        } else if (jeniss[1] > 0) {
+                            outlet_jenis = "2";
+                        } else if (jeniss[2] > 0) {
+                            outlet_jenis = "3";
+                        } else {
+                            Toast.makeText(getContext(), "jenis tidak ditemukan", Toast.LENGTH_SHORT).show();
+                        }
+
                         // mengambil nilai dari kolom "status"
                         String outlet_status = cursor.getString(cursor.getColumnIndex("status"));
 
@@ -456,17 +519,20 @@ double[][] waktuPesan;
         }
     }
 
-
-
 //    AHP TOPSIS
-    public void AHPTOPSIS(String tanggal){
+    public void AHPTOPSIS(String bulan){
     AHPTOPSIS at = new AHPTOPSIS();
+
+    getCriteria();
 
 //        input data pesanan
 //        pesanan [0] = waktu pesan
-//        pesanan [1] = jenis
-//        pesanan [2] = ukuran
-//        pesanan [3] = jumlah pesanan
+//        pesanan [1] = jenis kelamin
+//        pesanan [2] = jenis pakaian
+//        pesanan [3] = model
+//        pesanan [4] = ukuran
+//        pesanan [5] = jumlah
+//        pesanan [6] = status
 
         dbHelper = new DBHelper(getContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -474,35 +540,40 @@ double[][] waktuPesan;
 
     try
     {
-        // konversi tanggal
-        String a = tanggal;
+        // konversi bulan
+        String a = bulan;
         // menyiapkan query
-        String selectQuery = "SELECT * FROM orders where `status`!=4 and `tglPesan`='"+a+"'";
+        String selectQuery = "SELECT * FROM orders where `status`!=4 and `blnPesan`='"+a+"'";
         // menyiapkan cursor untuk membaca nilai
         Cursor cursor = db.rawQuery(selectQuery,null);
         // jika jumlah baris lebih dari 0
         if(cursor.getCount() >0)
         {
 
-            System.out.print("Masukkan jumlah pesanan : ");
             nData = cursor.getCount();
-            pesanan = new int[nData][4];
-            sData = new String[nData][4];
+            pesanan = new int[nData][7];
+            sData = new String[nData][7];
 
             // inisiasi kriteria
             waktuPesan = new double[nData + 1][nData];
-            jenis = new double[nData + 1][nData];
+            jenisk = new double[nData + 1][nData];
+            jenisp = new double[nData + 1][nData];
+            model = new double[nData + 1][nData];
             ukuran = new double[nData + 1][nData];
             jumlah = new double[nData + 1][nData];
-            kriteria = new double[5][4];
+            status = new double[nData + 1][nData];
+            kriteria = new double[8][7];
 
             //        mengisi data dummy
             for (int i = 0; i < nData; i++) {
                 for (int j = 0; j < nData; j++) {
                     waktuPesan[i][j] = 0;
-                    jenis[i][j] = 0;
+                    jenisk[i][j] = 0;
+                    jenisp[i][j] = 0;
+                    model[i][j] = 0;
                     ukuran[i][j] = 0;
                     jumlah[i][j] = 0;
+                    status[i][j] = 0;
                 }
             }
             for (int i = 0; i < 5; i++) {
@@ -514,37 +585,147 @@ double[][] waktuPesan;
 //        mengisi nilai 1 untuk alternatif dengan pembanding yang sama
             for (int i = 0; i < nData; i++) {
                 waktuPesan[i][i] = 1;
-                jenis[i][i] = 1;
+                jenisk[i][i] = 1;
+                jenisp[i][i] = 1;
+                model[i][i] = 1;
                 ukuran[i][i] = 1;
                 jumlah[i][i] = 1;
+                status[i][i] = 1;
             }
             for (int i = 0; i < 4; i++) {
                 kriteria[i][i] = 1;
             }
 
-            data = new double[cursor.getCount()][4];
+            data = new double[cursor.getCount()][7];
+//            data[0] = id
+//            data[1] = jenisk
+//            data[2] = jenisp
+//            data[3] = model
+//            data[4] = ukuran
+//            data[5] = jumlah
+//            data[6] = status
+
             int count = 0;
             // memulai iterasi untuk mengambil data perbaris
             while (cursor.moveToNext()) {
                 // mengambil nilai perkolom
+
+//                mengisi nilai data[x][0]
                 //mengambil id untuk penentuan waktu pesan
                 data[count][0]= cursor.getInt(cursor.getColumnIndex("idPesan"));
-                // mengambil nilai dari kolom "jenis"
-                int jenis= cursor.getInt(cursor.getColumnIndex("jenis"));
-                data[count][1] = (double) jenis;
+
+//                mengisi nilai data[x][1]
+                // mengambil nilai jenis kelamin
+                int [] jenisk = new int[2];
+                jenisk[0] = cursor.getInt(cursor.getColumnIndex("laki"));
+                jenisk[1] = cursor.getInt(cursor.getColumnIndex("perempuan"));
+                if (jenisk[0] > 0) {
+                    data[count][1] = 1;
+                } else if (jenisk[1] > 0) {
+                    data[count][1] = 2;
+                } else {
+                    Toast.makeText(getContext(), "jenis kelamin tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+
+//                mengisi nilai data[x][2]
+                // mengambil nilai jenis pakaian
+                int [] jeniss = new int [3];
+                jeniss[0] = cursor.getInt(cursor.getColumnIndex("seragam"));
+                jeniss[1] = cursor.getInt(cursor.getColumnIndex("atasan"));
+                jeniss[2] = cursor.getInt(cursor.getColumnIndex("bawahan"));
+                if (jeniss[0] > 0) {
+                    data[count][2] = 1;
+                } else if (jeniss[1] > 0) {
+                    data[count][2] = 2;
+                } else if (jeniss[2] > 0) {
+                    data[count][2] = 3;
+                } else {
+                    Toast.makeText(getContext(), "jenis pakaian tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+
+//                mengisi nilai data[x][3]
+//                mengambil nilai model
+                int [] modell = new int[8];
+                modell[0] = cursor.getInt(cursor.getColumnIndex("sbadan"));
+                modell[1] = cursor.getInt(cursor.getColumnIndex("terusan"));
+                modell[2] = cursor.getInt(cursor.getColumnIndex("lpanjang"));
+                modell[3] = cursor.getInt(cursor.getColumnIndex("lpendek"));
+                modell[4] = cursor.getInt(cursor.getColumnIndex("cpanjang"));
+                modell[5] = cursor.getInt(cursor.getColumnIndex("cpendek"));
+                modell[6] = cursor.getInt(cursor.getColumnIndex("rpanjang"));
+                modell[7] = cursor.getInt(cursor.getColumnIndex("rpendek"));
+                int modelll = 0;
+                if (modell[0] > 0) {
+                    modelll += 1;
+                }
+                if (modell[1] > 0) {
+                    modelll += 1;
+                }
+                if (modell[2] > 0) {
+                    modelll += 1;
+                }
+                if (modell[3] > 0) {
+                    modelll += 1;
+                }
+                if (modell[4] > 0) {
+                    modelll += 1;
+                }
+                if (modell[5] > 0) {
+                    modelll += 1;
+                }
+                if (modell[6] > 0) {
+                    modelll += 1;
+                }
+                if (modell[7] > 0) {
+                    modelll += 1;
+                }
+                data[count][3] = modelll;
+
+//                mengisi nilai data[x][4]
                 // mengambil nilai dari kolom "ukuran"
-                int ukuran= cursor.getInt(cursor.getColumnIndex("ukuran"));
-                data[count][2] = (double) ukuran;
+                int [] ukurann = new int [3];
+                ukurann[0] = cursor.getInt(cursor.getColumnIndex("anak"));
+                ukurann[1] = cursor.getInt(cursor.getColumnIndex("dewasa"));
+                ukurann[2] = cursor.getInt(cursor.getColumnIndex("xtra"));
+                if (ukurann[0] > 0) {
+                    data[count][4] = 1;
+                } else if (ukurann[1] > 0) {
+                    data[count][4] = 2;
+                } else if (ukurann[2] > 0) {
+                    data[count][4] = 3;
+                } else {
+                    Toast.makeText(getContext(), "ukuran tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+
+
+//                mengisi nilai data[x][5]
 //                    mengambil nilai jumlah
                 int jumlah= cursor.getInt(cursor.getColumnIndex("jumlah"));
-                data[count][3] = (double) jumlah;
+                data[count][5] = (double) jumlah;
+
+//                mengisi nilai data[x][6]
+                data[count][6] = Double.parseDouble(cursor.getString(cursor.getColumnIndex("status")));
 
 //                    mengambil data untuk ditampilkan
                 sData[count][0]= String.valueOf(cursor.getInt(cursor.getColumnIndex("idPesan")));
                 // mengambil nilai dari kolom "nama"
                 sData[count][1]= cursor.getString(cursor.getColumnIndex("nama"));
                 // mengambil nilai dari kolom "jenis"
-                sData[count][2]= cursor.getString(cursor.getColumnIndex("jenis"));
+                int [] jenisss = new int [3];
+                jenisss[0] = cursor.getInt(cursor.getColumnIndex("seragam"));
+                jenisss[1] = cursor.getInt(cursor.getColumnIndex("atasan"));
+                jenisss[2] = cursor.getInt(cursor.getColumnIndex("bawahan"));
+                if (jenisss[0] > 0) {
+                    sData[count][2] = "1";
+                } else if (jenisss[1] > 0) {
+                    sData[count][2] = "2";
+                } else if (jenisss[2] > 0) {
+                    sData[count][2] = "3";
+                } else {
+                    Toast.makeText(getContext(), "jenis tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+
+
                 // mengambil nilai dari kolom "status"
                 sData[count][3]= cursor.getString(cursor.getColumnIndex("status"));
 
@@ -607,70 +788,111 @@ double[][] waktuPesan;
         db.endTransaction();
     }
 
+
+    //        input data pesanan
+//        pesanan [0] = waktu pesan
+//        pesanan [1] = jenis kelamin
+//        pesanan [2] = jenis pakaian
+//        pesanan [3] = model
+//        pesanan [4] = ukuran
+//        pesanan [5] = jumlah
+//        pesanan [6] = status
+
 //        input nilai waktu pesan / urutan pesan
     for (int i = 0; i < nData; i++) {
 //            konversi nilai waktu pemesanan ke 3,5,7
 
         double x = data[i][0];
-        if (i==0) {
+        if (x == 0) {
             pesanan[i][0] = 5;
-        } else if (i==1) {
+        } else if (x == 1) {
             pesanan[i][0] = 3;
-        } else if (i>1) {
+        } else if (x > 1) {
             pesanan[i][0] = 1;
         }
 
-//            input nilai jenis pesanan
-//            konversi nilai jenis ke 3,5,7
-        int y = (int)data[i][1];
-        switch (y) {
+//        input nilai jenis kelamin
+        int xx = (int) data[i][1];
+        switch (xx) {
             case 1:
                 pesanan[i][1] = 5;
                 break;
             case 2:
                 pesanan[i][1] = 3;
                 break;
+            default:
+                break;
+        }
+
+//            input nilai jenis pesanan
+//            konversi nilai jenis ke 3,5,7
+        int y = (int) data[i][2];
+        switch (y) {
+            case 1:
+                pesanan[i][2] = 5;
+                break;
+            case 2:
+                pesanan[i][2] = 3;
+                break;
             case 3:
-                pesanan[i][1] = 1;
+                pesanan[i][2] = 1;
                 break;
             default:
                 break;
         }
 
+//        input nilai model
+        pesanan[i][3] = (int) data[i][3];
 
 //            input nilai ukuran
 //            konversi nilai ukuran ke 3,5,7
-        int d = (int)data[i][2];
+        int d = (int) data[i][4];
         switch (d) {
             case 1:
-                pesanan[i][2] = 3;
+                pesanan[i][4] = 3;
                 break;
             case 2:
-                pesanan[i][2] = 1;
+                pesanan[i][4] = 1;
                 break;
             case 3:
-                pesanan[i][2] = 1;
+                pesanan[i][4] = 1;
                 break;
             default:
                 break;
         }
 
-
 //            input nilai jumlah
 //            konversi nilai jumlah ke 3,5,7
-        int e = (int)data[i][3];
+        int e = (int) data[i][5];
         if (e == 1) {
-            pesanan[i][3] = 1;
+            pesanan[i][5] = 1;
         } else if (e == 2) {
-            pesanan[i][3] = 1;
+            pesanan[i][5] = 1;
         } else if (e > 2) {
-            pesanan[i][3] = 1;
+            pesanan[i][5] = 1;
         }
+
+//    input nilai status
+        int xy = (int) data[i][6];
+        switch (xy) {
+            case 1:
+                pesanan[i][6] = 1;
+                break;
+            case 2:
+                pesanan[i][6] = 3;
+                break;
+            case 3:
+                pesanan[i][6] = 9;
+                break;
+            default:
+                break;
+        }
+
     }
 
     System.out.println("cek data pesanan");
     for (int i = 0; i < nData; i++) {
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 7; j++) {
             if (j == (nData - 1)) {
                 System.out.println(pesanan[i][j]);
             } else {
@@ -679,13 +901,18 @@ double[][] waktuPesan;
         }
     }
     System.out.println("");
+    System.out.println("cek data kriteria");
+    for (int i = 0; i < criterias.length; i++){
+        System.out.println("Kriteria "+(i+1)+" : "+criterias[i]);
+    }
+    System.out.println("");
 
-    ahp(kriteria, 5, 7, 1, 1, nData, pesanan, waktuPesan, jenis, ukuran, jumlah);
+
+    ahp(kriteria, criterias,  nData, pesanan, waktuPesan, jenisk, jenisp, model, ukuran, jumlah, status);
 }
 
-    void ahp(double[][] kriteria, int k1, int k2, int k3, int k4, int nData, int[][] pesanan, double[][] waktuPesan, double[][] jenis, double[][] ukuran, double[][] jumlah) {
-        int z = 4;
-        double[] crit = {k1, k2, k3, k4};
+    void ahp(double[][] kriteria, int [] criterias, int nData, int[][] pesanan, double[][] waktuPesan, double[][] jenisk, double[][] jenisp, double[][] model, double[][] ukuran, double[][] jumlah, double[][] status) {
+        int z = 7;
         double[][] normKriteria = new double[z + 1][z];
         double[] eigenKriteria = new double[z];
 
@@ -694,12 +921,12 @@ double[][] waktuPesan;
         for (int i = 0; i < z; i++) {
             for (int j = 0; j < z; j++) {
                 if (kriteria[i][j] == 0) {
-                    if (crit[i] < crit[j]) {
-                        kriteria[j][i] = crit[j];
-                        kriteria[i][j] = (double) 1 / crit[j];
-                    } else if (crit[i] > crit[j]) {
-                        kriteria[i][j] = crit[i];
-                        kriteria[j][i] = (double) 1 / crit[i];
+                    if (criterias[i] < criterias[j]) {
+                        kriteria[j][i] = criterias[j];
+                        kriteria[i][j] = (double) 1 / criterias[j];
+                    } else if (criterias[i] > criterias[j]) {
+                        kriteria[i][j] = criterias[i];
+                        kriteria[j][i] = (double) 1 / criterias[i];
                     } else {
                         kriteria[j][i] = 1;
                         kriteria[i][j] = 1;
@@ -785,19 +1012,22 @@ double[][] waktuPesan;
         }
         System.out.println("");
 
-        topsis(nData, pesanan, waktuPesan, jenis, ukuran, jumlah, eigenKriteria);
+        topsis(nData, pesanan, waktuPesan, jenisk, jenisp, model, ukuran, jumlah, status, eigenKriteria);
     }
 
-    void topsis(int nData, int[][] pesanan, double[][] waktuPesan, double[][] jenis, double[][] ukuran, double[][] jumlah, double[] eigenCrit) {
+    void topsis(int nData, int[][] pesanan, double[][] waktuPesan, double[][] jenisk, double[][] jenisp, double[][] model, double[][] ukuran, double[][] jumlah, double[][] status, double[] eigenCrit) {
 
         double[][] normWaktuPesan = new double[nData + 1][nData];
-        double[][] normJenis = new double[nData + 1][nData];
+        double[][] normJenisk = new double[nData + 1][nData];
+        double[][] normJenisp = new double[nData + 1][nData];
+        double[][] normModel = new double[nData + 1][nData];
         double[][] normUkuran = new double[nData + 1][nData];
         double[][] normJumlah = new double[nData + 1][nData];
-        double[][] eigen = new double[4][nData];
-        double[][] weightAlt = new double[nData][4];
-        double[] pis = new double[4], nis = new double[4];
-        double[] x1 = new double[nData], x2 = new double[nData], x3 = new double[nData], x4 = new double[nData];
+        double[][] normStatus = new double[nData + 1][nData];
+        double[][] eigen = new double[7][nData];
+        double[][] weightAlt = new double[nData][7];
+        double[] pis = new double[7], nis = new double[7];
+        double[] x1 = new double[nData], x2 = new double[nData], x3 = new double[nData], x4 = new double[nData], x5 = new double[nData], x6 = new double[nData], x7 = new double[nData];
         double[] d1 = new double[nData], d2 = new double[nData], rc = new double[nData];
 
         System.out.println("");
@@ -849,19 +1079,54 @@ double[][] waktuPesan;
         }
         System.out.println("");
 
-//        menghitung jenis
+        //        menghitung jenis kelamin
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                if (jenis[i][j] == 0.0) {
+                if (jenisk[i][j] == 0.0) {
                     if (pesanan[i][1] < pesanan[j][1]) {
-                        jenis[j][i] = pesanan[j][1];
-                        jenis[i][j] = (double) 1 / pesanan[j][1];
+                        jenisk[j][i] = pesanan[j][1];
+                        jenisk[i][j] = (double) 1 / pesanan[j][1];
                     } else if (pesanan[i][1] > pesanan[j][1]) {
-                        jenis[i][j] = pesanan[i][1];
-                        jenis[j][i] = (double) 1 / pesanan[i][1];
+                        jenisk[i][j] = pesanan[i][1];
+                        jenisk[j][i] = (double) 1 / pesanan[i][1];
                     } else {
-                        jenis[i][j] = 1;
-                        jenis[j][i] = 1;
+                        jenisk[i][j] = 1;
+                        jenisk[j][i] = 1;
+                    }
+                }
+            }
+        }
+        //        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                jenisk[nData][i] += jenisk[j][i];
+            }
+        }
+
+        System.out.println("jenis kelamin");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(jenisk[i][j]);
+                } else {
+                    System.out.print(jenisk[i][j] + " | ");
+                }
+            }
+        }
+
+//        menghitung jenis pakaian
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (jenisp[i][j] == 0.0) {
+                    if (pesanan[i][2] < pesanan[j][2]) {
+                        jenisp[j][i] = pesanan[j][2];
+                        jenisp[i][j] = (double) 1 / pesanan[j][2];
+                    } else if (pesanan[i][2] > pesanan[j][2]) {
+                        jenisp[i][j] = pesanan[i][2];
+                        jenisp[j][i] = (double) 1 / pesanan[i][2];
+                    } else {
+                        jenisp[i][j] = 1;
+                        jenisp[j][i] = 1;
                     }
                 }
             }
@@ -869,27 +1134,74 @@ double[][] waktuPesan;
 //        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                jenis[nData][i] += jenis[j][i];
+                jenisp[nData][i] += jenisp[j][i];
             }
         }
 
-        System.out.println("jenis");
+        System.out.println("jenis pakaian");
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
                 if (j == (nData - 1)) {
-                    System.out.println(jenis[i][j]);
+                    System.out.println(jenisp[i][j]);
                 } else {
-                    System.out.print(jenis[i][j] + " | ");
+                    System.out.print(jenisp[i][j] + " | ");
                 }
             }
         }
+
         System.out.println("");
         System.out.println("jumlah dari data vertikal");
         for (int i = 0; i < nData; i++) {
             if (i == (nData - 1)) {
-                System.out.println(jenis[nData][i]);
+                System.out.println(jenisp[nData][i]);
             } else {
-                System.out.print(jenis[nData][i] + " | ");
+                System.out.print(jenisp[nData][i] + " | ");
+            }
+        }
+        System.out.println("");
+
+//        menghitung model
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (model[i][j] == 0.0) {
+                    if (pesanan[i][3] < pesanan[j][3]) {
+                        model[j][i] = pesanan[j][3];
+                        model[i][j] = (double) 1 / pesanan[j][3];
+                    } else if (pesanan[i][3] > pesanan[j][3]) {
+                        model[i][j] = pesanan[i][3];
+                        model[j][i] = (double) 1 / pesanan[i][3];
+                    } else {
+                        model[i][j] = 1;
+                        model[j][i] = 1;
+                    }
+                }
+            }
+        }
+//        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                model[nData][i] += model[j][i];
+            }
+        }
+
+        System.out.println("model pakaian");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(model[i][j]);
+                } else {
+                    System.out.print(model[i][j] + " | ");
+                }
+            }
+        }
+
+        System.out.println("");
+        System.out.println("jumlah dari data vertikal");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(model[nData][i]);
+            } else {
+                System.out.print(model[nData][i] + " | ");
             }
         }
         System.out.println("");
@@ -898,12 +1210,12 @@ double[][] waktuPesan;
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
                 if (ukuran[i][j] == 0.0) {
-                    if (pesanan[i][2] < pesanan[j][2]) {
-                        ukuran[j][i] = pesanan[j][2];
-                        ukuran[i][j] = (double) 1 / pesanan[j][2];
-                    } else if (pesanan[i][2] > pesanan[j][2]) {
-                        ukuran[i][j] = pesanan[i][2];
-                        ukuran[j][i] = (double) 1 / pesanan[i][2];
+                    if (pesanan[i][4] < pesanan[j][4]) {
+                        ukuran[j][i] = pesanan[j][4];
+                        ukuran[i][j] = (double) 1 / pesanan[j][4];
+                    } else if (pesanan[i][4] > pesanan[j][4]) {
+                        ukuran[i][j] = pesanan[i][4];
+                        ukuran[j][i] = (double) 1 / pesanan[i][4];
                     } else {
                         ukuran[i][j] = 1;
                         ukuran[j][i] = 1;
@@ -942,12 +1254,12 @@ double[][] waktuPesan;
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
                 if (jumlah[i][j] == 0.0) {
-                    if (pesanan[i][3] < pesanan[j][3]) {
-                        jumlah[j][i] = pesanan[j][3];
-                        jumlah[i][j] = (double) 1 / pesanan[j][3];
-                    } else if (pesanan[i][3] > pesanan[j][3]) {
-                        jumlah[i][j] = pesanan[i][3];
-                        jumlah[j][i] = (double) 1 / pesanan[i][3];
+                    if (pesanan[i][5] < pesanan[j][5]) {
+                        jumlah[j][i] = pesanan[j][5];
+                        jumlah[i][j] = (double) 1 / pesanan[j][5];
+                    } else if (pesanan[i][5] > pesanan[j][3]) {
+                        jumlah[i][j] = pesanan[i][5];
+                        jumlah[j][i] = (double) 1 / pesanan[i][5];
                     } else {
                         jumlah[i][j] = 1;
                         jumlah[j][i] = 1;
@@ -979,6 +1291,50 @@ double[][] waktuPesan;
                 System.out.println(jumlah[nData][i]);
             } else {
                 System.out.print(jumlah[nData][i] + " | ");
+            }
+        }
+
+        //        menghitung status
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (status[i][j] == 0.0) {
+                    if (pesanan[i][6] < pesanan[j][6]) {
+                        status[j][i] = pesanan[j][6];
+                        status[i][j] = (double) 1 / pesanan[j][6];
+                    } else if (pesanan[i][6] > pesanan[j][3]) {
+                        status[i][j] = pesanan[i][6];
+                        status[j][i] = (double) 1 / pesanan[i][6];
+                    } else {
+                        status[i][j] = 1;
+                        status[j][i] = 1;
+                    }
+                }
+            }
+        }
+//        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                status[nData][i] += status[j][i];
+            }
+        }
+
+        System.out.println("status pesan");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(status[i][j]);
+                } else {
+                    System.out.print(status[i][j] + " | ");
+                }
+            }
+        }
+        System.out.println("");
+        System.out.println("jumlah dari data vertikal");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(status[nData][i]);
+            } else {
+                System.out.print(status[nData][i] + " | ");
             }
         }
 
@@ -1019,26 +1375,26 @@ double[][] waktuPesan;
             }
         }
 
-//        jenis
+//        jenis kelamin
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                normJenis[j][i] = (double) jenis[j][i] / jenis[nData][i];
+                normJenisk[j][i] = (double) jenisk[j][i] / jenisk[nData][i];
             }
         }
 //        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                normJenis[nData][i] += normJenis[j][i];
+                normJenisk[nData][i] += normJenisk[j][i];
             }
         }
 
-        System.out.println("jenis");
+        System.out.println("jenis kelamin");
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
                 if (j == (nData - 1)) {
-                    System.out.println(normJenis[i][j]);
+                    System.out.println(normJenisk[i][j]);
                 } else {
-                    System.out.print(normJenis[i][j] + " | ");
+                    System.out.print(normJenisk[i][j] + " | ");
                 }
             }
         }
@@ -1046,9 +1402,75 @@ double[][] waktuPesan;
         System.out.println("jumlah dari data vertikal");
         for (int i = 0; i < nData; i++) {
             if (i == (nData - 1)) {
-                System.out.println(normJenis[nData][i]);
+                System.out.println(normJenisk[nData][i]);
             } else {
-                System.out.print(normJenis[nData][i] + " | ");
+                System.out.print(normJenisk[nData][i] + " | ");
+            }
+        }
+
+        //        jenis pakaian
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normJenisp[j][i] = (double) jenisp[j][i] / jenisp[nData][i];
+            }
+        }
+//        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normJenisp[nData][i] += normJenisp[j][i];
+            }
+        }
+
+        System.out.println("jenis pakaian");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(normJenisp[i][j]);
+                } else {
+                    System.out.print(normJenisp[i][j] + " | ");
+                }
+            }
+        }
+        System.out.println("");
+        System.out.println("jumlah dari data vertikal");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(normJenisp[nData][i]);
+            } else {
+                System.out.print(normJenisp[nData][i] + " | ");
+            }
+        }
+
+        //        model
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normModel[j][i] = (double) model[j][i] / model[nData][i];
+            }
+        }
+//        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normModel[nData][i] += normModel[j][i];
+            }
+        }
+
+        System.out.println("model");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(normModel[i][j]);
+                } else {
+                    System.out.print(normModel[i][j] + " | ");
+                }
+            }
+        }
+        System.out.println("");
+        System.out.println("jumlah dari data vertikal");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(normModel[nData][i]);
+            } else {
+                System.out.print(normModel[nData][i] + " | ");
             }
         }
 
@@ -1118,8 +1540,42 @@ double[][] waktuPesan;
             }
         }
 
+        //        status
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normStatus[j][i] = (double) status[j][i] / status[nData][i];
+            }
+        }
+//        menghitung jumlah dari masing" nilai pada baris per kolom [vertikal]
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                normStatus[nData][i] += normStatus[j][i];
+            }
+        }
+
+        System.out.println("jumlah pesan");
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                if (j == (nData - 1)) {
+                    System.out.println(normStatus[i][j]);
+                } else {
+                    System.out.print(normStatus[i][j] + " | ");
+                }
+            }
+        }
+        System.out.println("");
+        System.out.println("jumlah dari data vertikal");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(normStatus[nData][i]);
+            } else {
+                System.out.print(normStatus[nData][i] + " | ");
+            }
+        }
+
         System.out.println("");
         System.out.println("");
+
 
         System.out.println("menghitung eigen tiap alternatif");
 //        menghitung eigen dari tiap alternatif
@@ -1141,15 +1597,15 @@ double[][] waktuPesan;
         }
         System.out.println("");
 
-//        jenis
+//        jenis kelamin
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                eigen[1][i] += normJenis[i][j];
+                eigen[1][i] += normJenisk[i][j];
             }
             eigen[1][i] = (double) eigen[1][i] / nData;
         }
 
-        System.out.println("jenis");
+        System.out.println("jenis kelamin");
         for (int i = 0; i < nData; i++) {
             if (i == (nData - 1)) {
                 System.out.println(eigen[1][i]);
@@ -1159,15 +1615,15 @@ double[][] waktuPesan;
         }
         System.out.println("");
 
-//        ukuran
+        //        jenis pakaian
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                eigen[2][i] += normUkuran[i][j];
+                eigen[2][i] += normJenisp[i][j];
             }
             eigen[2][i] = (double) eigen[2][i] / nData;
         }
 
-        System.out.println("ukuran");
+        System.out.println("jenis pakaian");
         for (int i = 0; i < nData; i++) {
             if (i == (nData - 1)) {
                 System.out.println(eigen[2][i]);
@@ -1177,15 +1633,15 @@ double[][] waktuPesan;
         }
         System.out.println("");
 
-//       jumlah pesan
+        //        model
         for (int i = 0; i < nData; i++) {
             for (int j = 0; j < nData; j++) {
-                eigen[3][i] += normJumlah[i][j];
+                eigen[3][i] += normModel[i][j];
             }
             eigen[3][i] = (double) eigen[3][i] / nData;
         }
 
-        System.out.println("jumlah pesan");
+        System.out.println("model");
         for (int i = 0; i < nData; i++) {
             if (i == (nData - 1)) {
                 System.out.println(eigen[3][i]);
@@ -1194,10 +1650,64 @@ double[][] waktuPesan;
             }
         }
         System.out.println("");
+
+//        ukuran
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                eigen[4][i] += normUkuran[i][j];
+            }
+            eigen[4][i] = (double) eigen[4][i] / nData;
+        }
+
+        System.out.println("ukuran");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(eigen[4][i]);
+            } else {
+                System.out.print(eigen[4][i] + " | ");
+            }
+        }
+        System.out.println("");
+
+//       jumlah pesan
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                eigen[5][i] += normJumlah[i][j];
+            }
+            eigen[5][i] = (double) eigen[5][i] / nData;
+        }
+
+        System.out.println("jumlah pesan");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(eigen[5][i]);
+            } else {
+                System.out.print(eigen[5][i] + " | ");
+            }
+        }
+
+        //       status
+        for (int i = 0; i < nData; i++) {
+            for (int j = 0; j < nData; j++) {
+                eigen[6][i] += normStatus[i][j];
+            }
+            eigen[6][i] = (double) eigen[6][i] / nData;
+        }
+
+        System.out.println("status");
+        for (int i = 0; i < nData; i++) {
+            if (i == (nData - 1)) {
+                System.out.println(eigen[6][i]);
+            } else {
+                System.out.print(eigen[6][i] + " | ");
+            }
+        }
+
+        System.out.println("");
         for (int i = 0; i < nData; i++) {
             System.out.print("eigen data " + (i + 1) + " : ");
-            for (int j = 0; j < 4; j++) {
-                if (j == 3) {
+            for (int j = 0; j < 7; j++) {
+                if (j == 6) {
                     System.out.println(eigen[j][i]);
                 } else {
                     System.out.print(eigen[j][i] + " | ");
@@ -1209,15 +1719,15 @@ double[][] waktuPesan;
 
         System.out.println("mengalikan eigen tiap alternatif dengan bobot/eigen dari tiap kriteria");
         for (int i = 0; i < nData; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 7; j++) {
                 weightAlt[i][j] = (double) eigen[j][i] * eigenCrit[j];
             }
         }
 
         System.out.println("weighted alternatif");
         for (int i = 0; i < nData; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (j == 3) {
+            for (int j = 0; j < 7; j++) {
+                if (j == 6) {
                     System.out.println(weightAlt[i][j]);
                 } else {
                     System.out.print(weightAlt[i][j] + " | ");
@@ -1233,6 +1743,9 @@ double[][] waktuPesan;
             x2[i] = weightAlt[i][1];
             x3[i] = weightAlt[i][2];
             x4[i] = weightAlt[i][3];
+            x5[i] = weightAlt[i][4];
+            x6[i] = weightAlt[i][5];
+            x7[i] = weightAlt[i][6];
         }
 
 //        mencari pis
@@ -1240,13 +1753,19 @@ double[][] waktuPesan;
         Arrays.sort(x2);
         Arrays.sort(x3);
         Arrays.sort(x4);
+        Arrays.sort(x5);
+        Arrays.sort(x6);
+        Arrays.sort(x7);
         pis[0] = x1[nData - 1];
         pis[1] = x2[nData - 1];
         pis[2] = x3[nData - 1];
         pis[3] = x4[nData - 1];
+        pis[4] = x5[nData - 1];
+        pis[5] = x6[nData - 1];
+        pis[6] = x7[nData - 1];
         System.out.println("PIS");
-        for (int i = 0; i < 4; i++) {
-            if (i == 3) {
+        for (int i = 0; i < 7; i++) {
+            if (i == 6) {
                 System.out.println(pis[i]);
             } else {
                 System.out.print(pis[i] + " | ");
@@ -1258,9 +1777,12 @@ double[][] waktuPesan;
         nis[1] = x2[0];
         nis[2] = x3[0];
         nis[3] = x4[0];
+        nis[4] = x5[0];
+        nis[5] = x6[0];
+        nis[6] = x7[0];
         System.out.println("NIS");
-        for (int i = 0; i < 4; i++) {
-            if (i == 3) {
+        for (int i = 0; i < 7; i++) {
+            if (i == 6) {
                 System.out.println(nis[i]);
             } else {
                 System.out.print(nis[i] + " | ");
@@ -1273,7 +1795,13 @@ double[][] waktuPesan;
 //        d+
         System.out.println("d+");
         for (int i = 0; i < nData; i++) {
-            d1[i] = Math.pow((Math.pow((double) (weightAlt[i][0] - pis[0]), 2) + Math.pow((double) (weightAlt[i][1] - pis[1]), 2) + Math.pow((double) (weightAlt[i][2] - pis[2]), 2) + Math.pow((double) (weightAlt[i][3] - pis[3]), 2)), 0.5);
+            d1[i] = Math.pow((Math.pow((double) (weightAlt[i][0] - pis[0]), 2) +
+                    Math.pow((double) (weightAlt[i][1] - pis[1]), 2) +
+                    Math.pow((double) (weightAlt[i][2] - pis[2]), 2) +
+                    Math.pow((double) (weightAlt[i][3] - pis[3]), 2) +
+                    Math.pow((double) (weightAlt[i][4] - pis[4]), 2) +
+                    Math.pow((double) (weightAlt[i][5] - pis[5]), 2) +
+                    Math.pow((double) (weightAlt[i][6] - pis[6]), 2)), 0.5);
         }
 
         for (int i = 0; i < nData; i++) {
@@ -1284,7 +1812,13 @@ double[][] waktuPesan;
 //        d-
         System.out.println("d-");
         for (int i = 0; i < nData; i++) {
-            d2[i] = Math.pow((Math.pow((double) (weightAlt[i][0] - nis[0]), 2) + Math.pow((double) (weightAlt[i][1] - nis[1]), 2) + Math.pow((double) (weightAlt[i][2] - nis[2]), 2) + Math.pow((double) (weightAlt[i][3] - nis[3]), 2)), 0.5);
+            d2[i] = Math.pow((Math.pow((double) (weightAlt[i][0] - nis[0]), 2) +
+                    Math.pow((double) (weightAlt[i][1] - nis[1]), 2) +
+                    Math.pow((double) (weightAlt[i][2] - nis[2]), 2) +
+                    Math.pow((double) (weightAlt[i][3] - nis[3]), 2) +
+                    Math.pow((double) (weightAlt[i][4] - nis[4]), 2) +
+                    Math.pow((double) (weightAlt[i][5] - nis[5]), 2) +
+                    Math.pow((double) (weightAlt[i][6] - nis[6]), 2)), 0.5);
         }
 
         for (int i = 0; i < nData; i++) {
